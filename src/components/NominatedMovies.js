@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import NominationPlaceholder from "./NominationPlaceholder";
 
 const useStyles = makeStyles((theme) => ({
   resultEntry: {
@@ -27,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
   grid: {
     alignItems: "stretch"
   },
+  typography: {
+    fontSize: "1.2rem",
+  }
 }));
 
 const NominatedMovies = (props) => {
@@ -55,12 +59,12 @@ const NominatedMovies = (props) => {
           alignItems="center"
           justify="space-around">
           <Grid item>
-            <Typography variant="h6">
-              Nominations
+            <Typography variant="h6" className={classes.typography}>
+              NOMINATIONS
             </Typography>
           </Grid>
           <Grid item>
-            <Typography variant="h6">
+            <Typography variant="h6" className={classes.typography}>
               {props.movies.length}/{maxNominations}
             </Typography>
           </Grid>
@@ -79,11 +83,7 @@ const NominatedMovies = (props) => {
           Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
             return (
               <Grid item xs={12}>
-                <NominatedMovieCard
-                  movie={movie}
-                  showSkeleton={true}
-                  onRemoveNominationClicked={props.onRemoveNominationClicked}
-                />
+                <NominationPlaceholder />
               </Grid>
             );
           })}

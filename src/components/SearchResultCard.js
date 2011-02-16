@@ -24,23 +24,16 @@ const useStyles = makeStyles((theme) => ({
     height: "20vh",
   },
   content: {
-    // height: "100%",
+    height: "100%",
   },
-  skeletonTitle: {
-    width: "80%",
-    height: "3.5vh",
+  title: {
+    fontSize: "1rem",
   },
-  skeletonSubTitle: {
-    width: "5vw",
-    height: "3.5vh",
+  year: {
+    fontSize: "1rem",
   },
-  skeletonMedia: {
-    height: "20vh",
-    width: "100%",
-  },
-  skeletonContent: {
-    width: "5vw",
-    paddingBottom: "32%",
+  controls: {
+    paddingTop: "20%",
   }
 }));
 
@@ -55,7 +48,7 @@ const SearchResultCard = (props) => {
 
 
   return (
-    <Card className={classes.root} fullWidth={true}>
+    <Card className={classes.root}>
 
       <CardActionArea>
         {props.loading ? (
@@ -70,42 +63,46 @@ const SearchResultCard = (props) => {
         <CardContent className={classes.content}>
           {props.loading ? (
             <div className={classes.skeletonContent}>
-              <Skeleton animation="wave" height="100%"  width="100%"/>
+              <Skeleton animation="wave" height="100%" width="100%" />
               <Skeleton animation="wave" height="100%" width="80%" />
             </div>
           ) : (
             <>
-              <Typography variant="h6">
+              <Typography variant="h6" className={classes.title}>
                 {props.movie.Title}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" className={classes.year}>
                 {props.movie.Year}
               </Typography>
             </>
           )}
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.controls}>
         {props.loading ? (<>
           <Skeleton animation="wave" height="100%" width="100%" />
           <Skeleton animation="wave" height="100%" width="100%" />
         </>
         ) : (
           <>
-            <Button 
-            size="small" 
-            color="primary"
-            disabled={props.movie.disableNominate || props.disableNominations}
+            <Button
+              size="small"
+              color="primary"
+              disabled={props.movie.disableNominate || props.disableNominations}
               onClick={() => {
                 props.onNominateClicked(props.movie);
               }}>
               Nominate
-        </Button>
-            <Button 
-            size="small" 
-            color="primary">
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => {
+                window.open(`https://www.imdb.com/title/${props.movie.imdbID}`);
+              }}
+            >
               Learn More
-        </Button>
+            </Button>
           </>
         )}
       </CardActions>

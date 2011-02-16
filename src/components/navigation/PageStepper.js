@@ -25,26 +25,24 @@ const PageStepper = (props) => {
     const theme = useTheme();
     const classes = useStyles();
 
-    const maxSteps = props.steps;
-
     return (
         <Grid container
             className={classes.root}
             justify="space-between"
-            alignItems="center"
+            alignItems="center"maxStepsmaxStepsmaxSteps
         >
             <Grid item>
-                <Button size="small" onClick={props.onBack} disabled={props.activeStep === 0}>
+                <Button size="small" onClick={props.onBack} disabled={props.activePage == 1}>
                     {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                     Back
                 </Button>
             </Grid>
             <Grid item>
-                <Typography variant="body2">{props.activePage} / {maxSteps}</Typography>
+                <Typography variant="body2">{props.activePage} / {props.steps}</Typography>
 
             </Grid>
             <Grid item>
-                <Button size="small" onClick={props.onNext} disabled={props.activePage === maxSteps - 1}>
+                <Button size="small" onClick={props.onNext} disabled={props.activePage === props.steps - 1}>
                     Next
                     {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                 </Button>

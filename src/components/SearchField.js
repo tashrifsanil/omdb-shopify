@@ -11,10 +11,13 @@ import {
     Divider
 } from "@material-ui/core";
 
+
 import {
     makeStyles,
     fade
 } from '@material-ui/core/styles';
+
+import MovieCreationOutlinedIcon from '@material-ui/icons/MovieCreationOutlined';
 
 import '@fontsource/roboto';
 
@@ -23,10 +26,12 @@ import ShopifyIcon from '../resources/icons/shopify.svg'
 
 const SearchField = (props) => {
     const [landing, setLanding] = useState(true);
+    const [text, setText] = useState("");
 
     useEffect(() => {
         handleLanding();
     }, [props.landing])
+
 
     const [fieldStyle, setFieldStyle] = useState({
         "& .MuiOutlinedInput-root": {
@@ -44,7 +49,7 @@ const SearchField = (props) => {
         if (props.landing == false) {
             setRootStyle({
                 paddingTop: "0vh",
-                paddingBottom: "16px",
+                paddingBottom: "1vh",
                 alignItems: 'center',
             })
             setFieldStyle({
@@ -62,7 +67,13 @@ const SearchField = (props) => {
     }
 
     const handleChange = (event) => {
+        setText(event.target.value);
         props.setSearchTerm(event.target.value);
+    }
+
+    const handleHomeClick = (event) => {
+        setText("");
+        props.onHomeClick()
     }
 
     const useStyles = makeStyles((theme) => ({
@@ -92,6 +103,12 @@ const SearchField = (props) => {
         shoppies: {
             fontFamily: "Roboto",
         },
+        homeIcon: {
+            color: theme.palette.primary.main,
+            fontSize: "3rem",
+            marginLeft: "1rem",
+            marginTop: ".3rem",
+        }
     }));
 
     const classes = useStyles();
@@ -114,8 +131,18 @@ const SearchField = (props) => {
                     </Grid>
                 </Grid>
             ) : null}
-            <Grid item container xs={12}>
-                <Grid item xs={landing ? 3 : 1} />
+            <Grid item container xs={12} justify="center" alignItems="stretch">
+                <Grid item xs={landing ? 3 : 1}>
+                    {landing ? null : (
+                        <IconButton
+                            edge="start"
+                            color="inherit"
+                            aria-label="home"
+                            onClick={handleHomeClick}>
+                            <MovieCreationOutlinedIcon className={classes.homeIcon} />
+                        </IconButton>
+                    )}
+                </Grid>
 
                 <Grid item xs={landing ? 6 : 10}>
                     <TextField
@@ -126,6 +153,7 @@ const SearchField = (props) => {
                         fullWidth={true}
                         variant={'outlined'}
                         onChange={handleChange}
+                        value={text}
                         InputProps={{
                             className: classes.input,
                             startAdornment: (

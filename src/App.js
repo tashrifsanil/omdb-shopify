@@ -35,7 +35,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import IconButton from "@material-ui/core/IconButton";
 import TextField from "@material-ui/core/TextField";
 
-import { Box } from "@material-ui/core";
+import { Box, Card } from "@material-ui/core";
 import SearchField from "./components/SearchField";
 
 const useStyles = makeStyles((theme) => ({
@@ -121,6 +121,12 @@ function App() {
     }
   };
 
+  const handleHomeClick = () => {
+    setSearchTerm("");
+    setNominatedMoviesList([]);
+    setLanding(true); 
+  }
+
   const removeNomination = (movie) => {
     movie.disableNominate = false;
     const newNominationsList = nominatedMoviesList.filter(
@@ -175,10 +181,11 @@ function App() {
       </Helmet>
       {/* <SearchAppBar setSearchTerm={setSearchTerm} /> */}
       <Box>
-        <Grid container direction="row">
+        <Grid container direction="row" alignItems="stretch">
           <Grid item xs={12}>
             <SearchField
               landing={landing}
+              onHomeClick={handleHomeClick}
               setSearchTerm={setSearchTerm}
             />
 
@@ -186,19 +193,20 @@ function App() {
           <Grid item xs={1} />
           {landing ? (null) : (
             <>
-              <Grid item container xs={7}>
+              <Grid item container xs={7} alignItems="stretch" >
                 <SearchResults
                   searchTerm={searchTerm}
                   onNominateClicked={nominateMovie}
                   nominatedMoviesList={nominatedMoviesList} />
 
               </Grid>
-              <Grid item container direction="row" xs={3} spacing={2} style={{ height: '80vh' }} alignItems="stretch">
+              <Grid item container direction="row" xs={3} spacing={2} alignItems="stretch">
                 <NominatedMovies
                   movies={nominatedMoviesList}
                   setNominationsCompleted={setOpenNominationsDialog}
                   onRemoveNominationClicked={removeNomination}
                 />
+
               </Grid>
               <Grid item xs={1} />
             </>

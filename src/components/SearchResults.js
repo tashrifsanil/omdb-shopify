@@ -28,13 +28,14 @@ import axios from 'axios';
 const useStyles = makeStyles((theme) => ({
   row: {
     display: 'flex',
+    height: "100%",
     flexDirection: 'row',
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
     alignItems: 'stretch',
     height: '100%',
     marginBottom: theme.spacing(2),
-  }
+  },
 }));
 
 const sliceMap = (fn, from, toExclusive, array) => {
@@ -78,6 +79,7 @@ const SearchResults = (props) => {
   useEffect(() => {
     console.log("Search term was changed, ", props.searchTerm);
     setActivePage(1);
+    if (props.searchTerm.length > 0)
     searchMovieRequest();
 
   }, [props.searchTerm]);
@@ -172,7 +174,13 @@ const SearchResults = (props) => {
   return (
     <>
       {show ? (
-        <Box component="flex" style={{ height: '80vh' }} spacing={2}>
+        <Box component="flex" style={{ height: '100%', width: '100%' }} spacing={2}>
+          <PageStepper
+            steps={maxSteps}
+            activePage={activePage}
+            onBack={handlePageBack}
+            onNext={handlePageNext}
+          />
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Box className={classes.row}>
@@ -221,12 +229,7 @@ const SearchResults = (props) => {
             </Grid>
 
           </Grid>
-          <PageStepper
-            steps={maxSteps}
-            activePage={activePage}
-            onBack={handlePageBack}
-            onNext={handlePageNext}
-          />
+
         </Box>
 
       ) : null}

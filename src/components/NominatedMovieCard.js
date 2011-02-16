@@ -20,6 +20,7 @@ import Skeleton from '@material-ui/lab/Skeleton';
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%',
+    width: '100%',
   },
   details: {
     display: 'flex',
@@ -34,20 +35,10 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   title: {
-    fontSize: '1000',
+    fontSize: '1.2rem',
   },
   year: {
-    fontSize: '.1rem',
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+    fontSize: '1rem',
   },
 }));
 
@@ -73,10 +64,10 @@ const NominatedMovieCard = (props) => {
                 </>
               ) : (
                 <>
-                  <Typography variant="h6" className={classes.Title} noWrap={true}>
+                  <Typography variant="h6" className={classes.title} noWrap={true}>
                     {props.movie.Title}
                   </Typography>
-                  <Typography variant="subtitle1" color="textSecondary" className={classes.Year}>
+                  <Typography variant="subtitle1" color="textSecondary" className={classes.year}>
                     {props.movie.Year}
                   </Typography>
                 </>
