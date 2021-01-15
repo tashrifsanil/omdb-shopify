@@ -24,7 +24,9 @@ function App() {
     if (responseJson.Search) {
       setMovies(responseJson.Search)
     }
-  }
+  };
+
+
   return (
     // Use bootstrap styles for root container
     <div className="container-fluid">
