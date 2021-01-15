@@ -1,5 +1,18 @@
+body {
+  background: #141414;
+  color: #ffffff;
+}
+
+.TextField {
+  color: #ffffff;
+}
+/* .MovieRibbon {
+  background: red;
+}
+
 .App {
   text-align: center;
+  background-color: #ffffff;
 }
 
 .App-logo {
@@ -35,4 +48,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

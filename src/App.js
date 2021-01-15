@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
+import React, { useState, useEffect } from 'react';
+import SearchBar from './components/SearchBar';
+import MovieGrid from './components/MovieGrid';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [movies, setMovies] = useState([])
+
+  // This gets run everytime the state of searchTerm changes
+  useEffect(() => {
+    console.log("Search term was changed, ", searchTerm);
+    searchMovieRequest();
+  }, [searchTerm])
+
+  const searchMovieRequest = async () => {
+    const url = "http://www.omdbapi.com/?s=" + searchTerm + "&apikey=a7d62505";
+    const response = await fetch(url);
+
+    const responseJson = await response.json();
+
+    // If search results returned are not empty
+    if (responseJson.Search) {
+      setMovies(responseJson.Search)
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // Use bootstrap styles for root container
+    <div className="container-fluid">
+      <SearchBar setSearchTerm={setSearchTerm} />
+      <div className="row">
+        <MovieGrid movies={movies}></MovieGrid>
+      </div>
     </div>
   );
 }
