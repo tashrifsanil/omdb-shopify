@@ -270,6 +270,7 @@ function App() {
           </Typography>
           <SearchResults
             searchTerm={searchTerm}
+            nominatedMoviesList={nominatedMoviesList}
             onNominateClicked={nominateMovie}
           />
         </Grid>

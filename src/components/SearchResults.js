@@ -51,11 +51,36 @@ const SearchResults = (props) => {
 
     // If search results returned are not empty
     if (responseJson.Search) {
-      setMovies(responseJson.Search);
       var totalResults = parseInt(responseJson.totalResults);
-      for (var i = 0; i < responseJson.Search.length; i++) {
-        responseJson.Search[i].disableNominate = false;
+
+      // Additionally if we get a list of alreadyNominated movies
+      // we need to disable the movies in that list so they can't be nominated again
+      if (props.nominatedMoviesList) {
+        for (var i = 0; i < responseJson.Search.length; i++) {
+          responseJson.Search[i].disableNominate = false;
+          for (var j = 0; j < props.nominatedMoviesList.length; j++) {
+            console.log(
+              "Search id ",
+              responseJson.Search[i].imdbID,
+              " storageid ",
+              props.nominatedMoviesList[j].imdbID
+            );
+            if (
+              responseJson.Search[i].imdbID ===
+              props.nominatedMoviesList[j].imdbID
+            ) {
+              console.log("Disabled comparison succeeded ");
+              responseJson.Search[i].disableNominate = true;
+            }
+          }
+        }
+      } else {
+        for (var iter = 0; iter < responseJson.Search.length; iter++) {
+          responseJson.Search[iter].disableNominate = false;
+        }
       }
+
+      setMovies(responseJson.Search);
       // Calculation to determine how many pages there will be in total
       // based on totalResults
       // responseJson.Search.length is how many cards there are page, i.e.
