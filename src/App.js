@@ -258,6 +258,7 @@ function App() {
     );
 
     setNominatedMoviesList(newNominationsList);
+    saveToLocalStorage(newNominationsList);
   };
 
   const saveToLocalStorage = (items) => {
