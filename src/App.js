@@ -1,16 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import SearchBar from "./components/SearchBar";
 import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import AddIcon from "@material-ui/icons/Add";
-import EditIcon from "@material-ui/icons/Edit";
-import UpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { grey, red } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
 import ChevronLeftOutlinedIcon from "@material-ui/icons/ChevronLeftOutlined";
 import Dialog from "@material-ui/core/Dialog";
@@ -21,6 +17,9 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import SearchResults from "./components/SearchResults";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +52,22 @@ const pageControlStyles = makeStyles((theme) => ({
     },
     bottom: theme.spacing(4),
     right: theme.spacing(20),
+  },
+}));
+
+const searchResultsStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    // justifyContent: "center",
+    height: "100%",
+  },
+  paper: {
+    justifyContent: "center",
+    height: 800,
+    width: "100%",
+  },
+  control: {
+    padding: theme.spacing(2),
   },
 }));
 
@@ -197,6 +212,11 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [maxPages, setMaxPages] = useState(1);
+  const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
+
+  const nominateMovie = (movie) => {
+    setNominatedMoviesList([...nominatedMoviesList, movie]);
+  };
 
   // This gets run everytime the state of searchTerm changes
   useEffect(() => {
@@ -229,21 +249,24 @@ function App() {
     }
   };
 
+  const classes = searchResultsStyles();
+
   return (
     // Use bootstrap styles for root container
     <>
       <NavBar setSearchTerm={setSearchTerm} />
-      <div className="container-fluid">
-        <div className="row">
-          <MovieGrid movies={movies}></MovieGrid>
-        </div>
-        <PageControlFABS
-          maxPages={maxPages}
-          minPages={1}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        ></PageControlFABS>
-      </div>
+      <Grid container className={classes.root} spacing={2} xs={12}>
+        <Grid item xs={6}>
+          <SearchResults movies={movies} />
+        </Grid>
+        <Grid item xs={6}></Grid>
+      </Grid>
+      <PageControlFABS
+        maxPages={maxPages}
+        minPages={1}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      ></PageControlFABS>
     </>
   );
 }
