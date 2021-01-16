@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -22,31 +22,55 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
   },
   nominateButton: {
-    color: "red",
+    color: "#55ff00",
   },
 }));
 
 const SearchResults = (props) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
+  const [movies, setMovies] = useState([]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+  // This gets run everytime the state of searchTerm changes
+  useEffect(() => {
+    console.log("Search term was changed, ", props.searchTerm);
+    searchMovieRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.searchTerm, props.currentPage]);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
+  const searchMovieRequest = async () => {
+    const url =
+      "https://www.omdbapi.com/?s=" +
+      props.searchTerm +
+      "&apikey=a7d62505" +
+      "&page=" +
+      props.currentPage;
+    const response = await fetch(url);
+
+    const responseJson = await response.json();
+
+    // If search results returned are not empty
+    if (responseJson.Search) {
+      setMovies(responseJson.Search);
+      var totalResults = parseInt(responseJson.totalResults);
+      // Calculation to determine how many pages there will be in total
+      // based on totalResults
+      // responseJson.Search.length is how many cards there are page, i.e.
+      // how many results get returned by page
+      //   var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
+      //   props.setMaxPages(maxPagesCalc);
     }
+  };
 
-    setChecked(newChecked);
+  const handleNominateClicked = (movie) => {
+    console.log("Nominated ", movie.Title);
+    props.onNominateClicked(movie);
   };
 
   return (
     <Container>
       <List className={classes.root}>
-        {props.movies.map((movie, index) => {
+        {movies.map((movie, index) => {
           return (
             <ListItem
               key={movie.imdbID}
@@ -77,7 +101,14 @@ const SearchResults = (props) => {
               />
 
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="nominate">
+                <IconButton
+                  edge="end"
+                  aria-label="nominate"
+                  onClick={() => {
+                    console.log("movie clickeddd", movie.Title);
+                    props.onNominateClicked(movie);
+                  }}
+                >
                   <AddCircleIcon className={classes.nominateButton} />
                 </IconButton>
               </ListItemSecondaryAction>

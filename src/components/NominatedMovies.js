@@ -7,7 +7,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
@@ -78,7 +78,9 @@ const NominatedMovies = (props) => {
 
               <ListItemSecondaryAction>
                 <IconButton edge="end" aria-label="nominate">
-                  <AddCircleIcon className={classes.removeNominationButton} />
+                  <RemoveCircleIcon
+                    className={classes.removeNominationButton}
+                  />
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>

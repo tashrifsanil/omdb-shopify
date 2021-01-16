@@ -20,6 +20,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import SearchResults from "./components/SearchResults";
+import NominatedMovies from "./components/NominatedMovies";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -211,43 +212,19 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [maxPages, setMaxPages] = useState(1);
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
+  const [maxPages, setMaxPages] = useState(1);
 
   const nominateMovie = (movie) => {
     setNominatedMoviesList([...nominatedMoviesList, movie]);
   };
 
-  // This gets run everytime the state of searchTerm changes
-  useEffect(() => {
-    console.log("Search term was changed, ", searchTerm);
-    searchMovieRequest();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchTerm, currentPage]);
-
-  const searchMovieRequest = async () => {
-    const url =
-      "https://www.omdbapi.com/?s=" +
-      searchTerm +
-      "&apikey=a7d62505" +
-      "&page=" +
-      currentPage;
-    const response = await fetch(url);
-
-    const responseJson = await response.json();
-
-    // If search results returned are not empty
-    if (responseJson.Search) {
-      setMovies(responseJson.Search);
-      var totalResults = parseInt(responseJson.totalResults);
-      // Calculation to determine how many pages there will be in total
-      // based on totalResults
-      // responseJson.Search.length is how many cards there are page, i.e.
-      // how many results get returned by page
-      var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
-      setMaxPages(maxPagesCalc);
-    }
-  };
+  // // This gets run everytime the state of searchTerm changes
+  // useEffect(() => {
+  //   console.log("Search term was changed, ", searchTerm);
+  //   searchMovieRequest();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [searchTerm, currentPage]);
 
   const classes = searchResultsStyles();
 
@@ -255,11 +232,16 @@ function App() {
     // Use bootstrap styles for root container
     <>
       <NavBar setSearchTerm={setSearchTerm} />
-      <Grid container className={classes.root} spacing={2} xs={12}>
-        <Grid item xs={6}>
-          <SearchResults movies={movies} />
+      <Grid container className={classes.root} spacing={1} xs={12}>
+        <Grid item xs={3}>
+          <SearchResults
+            searchTerm={searchTerm}
+            onNominateClicked={nominateMovie}
+          />
         </Grid>
-        <Grid item xs={6}></Grid>
+        <Grid item xs={3}>
+          <NominatedMovies movies={nominatedMoviesList} />
+        </Grid>
       </Grid>
       <PageControlFABS
         maxPages={maxPages}
