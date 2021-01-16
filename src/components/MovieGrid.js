@@ -26,8 +26,9 @@ const MoviePosterCard = (props) => {
   console.log("Get more data");
   const [open, setOpen] = React.useState(false);
   const [moreInfo, setAdditionalMovieData] = React.useState({});
-  // This is set to true once the user clicks on a poster, that way another API
-  // request doesn't need to be made if the user clicks the same poster
+  // Sometimes we get broken images from the API, so we need a way to change the poster image
+  // url in the event of a broken image
+  const [posterUrl, setPosterUrl] = React.useState(props.poster);
 
   const getAdditionalMovieData = async () => {
     const url =
@@ -37,13 +38,23 @@ const MoviePosterCard = (props) => {
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    // If search results returned are not empty
     setAdditionalMovieData(responseJson);
   };
 
-  //   useEffect(() => {
-  //     getAdditionalMovieData();
-  //   }, [moreInfo]);
+  useEffect(() => {
+    fixPosterImageErrors();
+  }, [props.poster]);
+
+  const fixPosterImageErrors = () => {
+    // this temporary fallback image url will be changed later
+    if (props.poster === "N/A") {
+      setPosterUrl(
+        "https://toppng.com/uploads/preview/movie-moviemaker-film-cut-svg-png-icon-free-download-movie-icon-11563265487xzdashbdvx.png"
+      );
+    } else {
+      setPosterUrl(props.poster);
+    }
+  };
 
   const handleCardClick = () => {
     getAdditionalMovieData();
@@ -59,7 +70,13 @@ const MoviePosterCard = (props) => {
       key={props.imdbID}
       className="image-container d-flex justify-content-start m-2"
     >
-      <img src={props.poster} onClick={handleCardClick} alt="movie"></img>
+      <img
+        width={200}
+        src={posterUrl}
+        onClick={handleCardClick}
+        onError={fixPosterImageErrors}
+        alt="movie"
+      ></img>
       <MovieInfoDialog
         key={props.imdbID}
         open={open}
