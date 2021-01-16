@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "100%",
     overflow: "auto",
   },
-  nominateButton: {
+  nominateIcon: {
     color: "#55ff00",
   },
 }));
@@ -53,6 +53,9 @@ const SearchResults = (props) => {
     if (responseJson.Search) {
       setMovies(responseJson.Search);
       var totalResults = parseInt(responseJson.totalResults);
+      for (var i = 0; i < responseJson.Search.length; i++) {
+        responseJson.Search[i].disableNominate = false;
+      }
       // Calculation to determine how many pages there will be in total
       // based on totalResults
       // responseJson.Search.length is how many cards there are page, i.e.
@@ -104,12 +107,16 @@ const SearchResults = (props) => {
                 <IconButton
                   edge="end"
                   aria-label="nominate"
+                  disabled={movie.disableNominate}
                   onClick={() => {
+                    movie.disableNominate = true;
                     console.log("movie clickeddd", movie.Title);
                     props.onNominateClicked(movie);
                   }}
                 >
-                  <AddCircleIcon className={classes.nominateButton} />
+                  {!movie.disableNominate ? (
+                    <AddCircleIcon className={classes.nominateIcon} />
+                  ) : null}
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>
