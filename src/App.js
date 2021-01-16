@@ -211,6 +211,9 @@ const PageControlFABS = (props) => {
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchResultsVisible, setSearchResultsVisibility] = useState(false);
+  const [nominationsVisible, setNominationsVisibility] = useState(false);
+
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
@@ -230,6 +233,16 @@ function App() {
       setNominatedMoviesList(nominatedMovies);
     }
   }, []);
+
+  useEffect(() => {
+    // Search term has changed, if it's more than 3 characters show search results
+    if (searchTerm.length >= 3) {
+      setSearchResultsVisibility(true);
+    }
+    if (nominatedMoviesList.length > 0) {
+      setNominationsVisibility(true);
+    }
+  }, [searchTerm, nominatedMoviesList]);
 
   const nominateMovie = (movie) => {
     movie.disableNominate = true;
@@ -265,9 +278,11 @@ function App() {
       <NavBar setSearchTerm={setSearchTerm} />
       <Grid container className={classes.root} spacing={6} xs={12}>
         <Grid item xs={3} direction={"column"} alignItems="center">
-          <Typography variant="h5" align="center">
-            Search Results
-          </Typography>
+          {searchResultsVisible ? (
+            <Typography variant="h5" align="center">
+              Search Results
+            </Typography>
+          ) : null}
           <SearchResults
             searchTerm={searchTerm}
             nominatedMoviesList={nominatedMoviesList}
@@ -275,9 +290,11 @@ function App() {
           />
         </Grid>
         <Grid item xs={3}>
-          <Typography variant="h5" align="center">
-            Nominations
-          </Typography>
+          {nominationsVisible ? (
+            <Typography variant="h5" align="center">
+              Nominations
+            </Typography>
+          ) : null}
           <NominatedMovies
             movies={nominatedMoviesList}
             onRemoveNominationClicked={removeNomination}
