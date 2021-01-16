@@ -207,7 +207,7 @@ function App() {
 
   const searchMovieRequest = async () => {
     const url =
-      "http://www.omdbapi.com/?s=" +
+      "https://www.omdbapi.com/?s=" +
       searchTerm +
       "&apikey=a7d62505" +
       "&page=" +

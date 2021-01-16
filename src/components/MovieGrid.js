@@ -34,7 +34,7 @@ const MoviePosterCard = (props) => {
 
   const getAdditionalMovieData = async () => {
     const url =
-      "http://www.omdbapi.com/?i=" +
+      "https://www.omdbapi.com/?i=" +
       props.imdbID +
       "&apikey=a7d62505&plot=full";
     const response = await fetch(url);
