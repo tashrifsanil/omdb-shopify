@@ -220,6 +220,14 @@ function App() {
     setNominatedMoviesList([...nominatedMoviesList, movie]);
   };
 
+  const removeNomination = (movie) => {
+    const newNominationsList = nominatedMoviesList.filter(
+      (nominatedMoviesList) => nominatedMoviesList.imdbID !== movie.imdbID
+    );
+
+    setNominatedMoviesList(newNominationsList);
+  };
+
   // // This gets run everytime the state of searchTerm changes
   // useEffect(() => {
   //   console.log("Search term was changed, ", searchTerm);
@@ -247,7 +255,10 @@ function App() {
           <Typography variant="h5" align="center">
             Nominations
           </Typography>
-          <NominatedMovies movies={nominatedMoviesList} />
+          <NominatedMovies
+            movies={nominatedMoviesList}
+            onRemoveNominationClicked={removeNomination}
+          />
         </Grid>
       </Grid>
       <PageControlFABS

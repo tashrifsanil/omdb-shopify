@@ -77,7 +77,13 @@ const NominatedMovies = (props) => {
               />
 
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="nominate">
+                <IconButton
+                  edge="end"
+                  aria-label="nominate"
+                  onClick={() => {
+                    props.onRemoveNominationClicked(movie);
+                  }}
+                >
                   <RemoveCircleIcon
                     className={classes.removeNominationButton}
                   />
