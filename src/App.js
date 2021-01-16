@@ -216,8 +216,25 @@ function App() {
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
   const [maxPages, setMaxPages] = useState(1);
 
+  // This only gets run when the app loads initially for the first time
+
+  useEffect(() => {
+    const nominatedMovies = JSON.parse(
+      localStorage.getItem("omdb-app-nominations")
+    );
+    console.log("Nominated movies local storage ", nominatedMovies);
+    // If we have nothing in local storage our array can be none
+    // so to avoid that we check if its before setting the state of nominated nominated movies
+    // from local storage
+    if (nominatedMovies) {
+      setNominatedMoviesList(nominatedMovies);
+    }
+  }, []);
+
   const nominateMovie = (movie) => {
-    setNominatedMoviesList([...nominatedMoviesList, movie]);
+    const newNominationsList = [...nominatedMoviesList, movie];
+    setNominatedMoviesList(newNominationsList);
+    saveToLocalStorage(newNominationsList);
   };
 
   const removeNomination = (movie) => {
@@ -228,6 +245,9 @@ function App() {
     setNominatedMoviesList(newNominationsList);
   };
 
+  const saveToLocalStorage = (items) => {
+    localStorage.setItem("omdb-app-nominations", JSON.stringify(items));
+  };
   // // This gets run everytime the state of searchTerm changes
   // useEffect(() => {
   //   console.log("Search term was changed, ", searchTerm);
