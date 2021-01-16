@@ -5,12 +5,16 @@ import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
-import MovieIcon from "@material-ui/icons/Movie";
-import TheatersOutlinedIcon from "@material-ui/icons/TheatersOutlined";
 import MovieCreationOutlinedIcon from "@material-ui/icons/MovieCreationOutlined";
+
 import "./NavBar.css";
 
 const useStyles = makeStyles((theme) => ({
+  OMDBTitle: {
+    fontFamily: "BebasNeue",
+    fontSize: "300%",
+    width: "100%",
+  },
   appBar: {
     backgroundColor: "#181818",
   },
@@ -20,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   movieIcon: {
     // width: "3%",
     // height: "3%",
-    fontSize: "300%",
+    fontSize: "310%",
     marginRight: theme.spacing(2),
     color: "#ff316f",
     // transform: "rotate(90deg)",
@@ -74,7 +78,7 @@ const NavBar = (props) => {
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <MovieCreationOutlinedIcon className={classes.movieIcon} />
-          <Typography className={"OMDBTitle"} variant="h4" noWrap>
+          <Typography className={classes.OMDBTitle} variant="h4" noWrap>
             OMDB MOVIES
           </Typography>
           <div className={classes.search}>
