@@ -1,14 +1,14 @@
 import React from 'react';
-import { TextField } from '@material-ui/core';
-
 
 const SearchBar = (props) => {
 
     return (
         <>
-            <TextField
-                onChange={(event) => props.setSearchTerm(event.target.value)}
-            ></TextField>
+            <div className='col col-sm-4 searchBar'>
+                <input className='form-control'
+                    placeholder="Type to search ..."
+                    onChange={(event) => props.setSearchTerm(event.target.value)}></input>
+            </div>
         </>
     )
 };

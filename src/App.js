@@ -3,6 +3,7 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import MovieGrid from './components/MovieGrid';
+import NavBar from './components/NavBar';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,6 +13,7 @@ function App() {
   useEffect(() => {
     console.log("Search term was changed, ", searchTerm);
     searchMovieRequest();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm])
 
   const searchMovieRequest = async () => {
@@ -30,7 +32,7 @@ function App() {
   return (
     // Use bootstrap styles for root container
     <div className="container-fluid">
-      <SearchBar setSearchTerm={setSearchTerm} />
+      <NavBar setSearchTerm={setSearchTerm} />
       <div className="row">
         <MovieGrid movies={movies}></MovieGrid>
       </div>
