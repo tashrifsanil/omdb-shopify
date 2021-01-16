@@ -21,6 +21,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import SearchResults from "./components/SearchResults";
 import NominatedMovies from "./components/NominatedMovies";
+import Typography from "@material-ui/core/Typography";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -232,14 +233,20 @@ function App() {
     // Use bootstrap styles for root container
     <>
       <NavBar setSearchTerm={setSearchTerm} />
-      <Grid container className={classes.root} spacing={1} xs={12}>
-        <Grid item xs={3}>
+      <Grid container className={classes.root} spacing={6} xs={12}>
+        <Grid item xs={3} direction={"column"} alignItems="center">
+          <Typography variant="h5" align="center">
+            Search Results
+          </Typography>
           <SearchResults
             searchTerm={searchTerm}
             onNominateClicked={nominateMovie}
           />
         </Grid>
         <Grid item xs={3}>
+          <Typography variant="h5" align="center">
+            Nominations
+          </Typography>
           <NominatedMovies movies={nominatedMoviesList} />
         </Grid>
       </Grid>
