@@ -10,7 +10,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import EditIcon from "@material-ui/icons/Edit";
 import UpIcon from "@material-ui/icons/KeyboardArrowUp";
-import { green, red } from "@material-ui/core/colors";
+import { grey, red } from "@material-ui/core/colors";
 import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
 import ChevronLeftOutlinedIcon from "@material-ui/icons/ChevronLeftOutlined";
 import Dialog from "@material-ui/core/Dialog";
@@ -31,30 +31,34 @@ const pageControlStyles = makeStyles((theme) => ({
   },
   nextPageFab: {
     position: "absolute",
-    bottom: theme.spacing(5),
-    right: theme.spacing(5),
+    color: theme.palette.common.white,
+    backgroundColor: grey[900],
+    "&:hover": {
+      backgroundColor: "#f50057",
+    },
+    bottom: theme.spacing(4),
+    right: theme.spacing(4),
   },
   pageIndicatorFab: {
     position: "absolute",
-    bottom: theme.spacing(5),
-    right: theme.spacing(15),
+    bottom: theme.spacing(4),
+    right: theme.spacing(12),
   },
   prevPageFab: {
     position: "absolute",
     color: theme.palette.common.white,
-    // backgroundColor: green[500],
-    // "&:hover": {
-    //   backgroundColor: green[600],
-    // },
-    bottom: theme.spacing(5),
-    right: theme.spacing(25),
+    backgroundColor: grey[900],
+    "&:hover": {
+      backgroundColor: "#f50057",
+    },
+    bottom: theme.spacing(4),
+    right: theme.spacing(20),
   },
 }));
 
 // Page control floating buttons
 const PageControlFABS = (props) => {
   const classes = pageControlStyles();
-  const theme = useTheme();
 
   const [pageCtrlDialogVisible, setPageCtrlVisibility] = useState(false);
   // Keeps track of the page number that the user inputs in the page control dialog
@@ -89,9 +93,12 @@ const PageControlFABS = (props) => {
     if (event.key === "Enter") {
       // Jumps to the page the user types on enter key pressed
       if (!pageError) {
+        // Hide the dialog after enter key
+        setPageCtrlVisibility(false);
         // The user typed a valid page number to jump to in the dialog
         // so set that valid page number as the current page number
         props.setCurrentPage(inputtedPageNumDialog);
+        event.preventDefault();
       }
     }
   };

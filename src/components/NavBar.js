@@ -6,6 +6,9 @@ import InputBase from "@material-ui/core/InputBase";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import MovieIcon from "@material-ui/icons/Movie";
+import TheatersOutlinedIcon from "@material-ui/icons/TheatersOutlined";
+import MovieCreationOutlinedIcon from "@material-ui/icons/MovieCreationOutlined";
+import "./NavBar.css";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -15,18 +18,12 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   movieIcon: {
-    width: "3%",
-    height: "3%",
+    // width: "3%",
+    // height: "3%",
+    fontSize: "300%",
     marginRight: theme.spacing(2),
-    color: "white", //"#ff316f",
-  },
-  title: {
-    flexGrow: 1,
-    fontFamily: "Open Sans Light",
-    display: "none",
-    [theme.breakpoints.up("sm")]: {
-      display: "block",
-    },
+    color: "#ff316f",
+    // transform: "rotate(90deg)",
   },
   search: {
     position: "relative",
@@ -76,9 +73,9 @@ const NavBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
-          <MovieIcon className={classes.movieIcon} />
-          <Typography className={classes.title} variant="h4" noWrap>
-            Movies
+          <MovieCreationOutlinedIcon className={classes.movieIcon} />
+          <Typography className={"OMDBTitle"} variant="h4" noWrap>
+            OMDB MOVIES
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

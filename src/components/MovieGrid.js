@@ -22,6 +22,8 @@ const MovieMoreInfo = (props) => {
 };
 
 const MoviePosterCard = (props) => {
+  const width = 200;
+  const height = 500;
   // open is a boolean value that determines if a more info dialog should be shown
   console.log("Get more data");
   const [open, setOpen] = React.useState(false);
@@ -68,10 +70,11 @@ const MoviePosterCard = (props) => {
   return (
     <div
       key={props.imdbID}
-      className="image-container d-flex justify-content-start m-2"
+      className="image-container d-flex justify-content-center ml-4 mr-4 mb-3 mt-3"
     >
       <img
-        width={200}
+        width={330}
+        height={415}
         src={posterUrl}
         onClick={handleCardClick}
         onError={fixPosterImageErrors}

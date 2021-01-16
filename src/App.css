@@ -21,7 +21,7 @@ body {
 .image-container:hover {
   /* Change cursor to pointer on poster hover */
   cursor: pointer;
-  transform: scale(1.07);
+  transform: scale(1.1);
 }
 
 .image-container:hover .overlay {
