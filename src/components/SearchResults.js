@@ -109,7 +109,7 @@ const SearchResults = (props) => {
                   aria-label="nominate"
                   disabled={movie.disableNominate}
                   onClick={() => {
-                    movie.disableNominate = true;
+                    // movie.disableNominate = true;
                     console.log("movie clickeddd", movie.Title);
                     props.onNominateClicked(movie);
                   }}

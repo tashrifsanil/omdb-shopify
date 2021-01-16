@@ -232,12 +232,14 @@ function App() {
   }, []);
 
   const nominateMovie = (movie) => {
+    movie.disableNominate = true;
     const newNominationsList = [...nominatedMoviesList, movie];
     setNominatedMoviesList(newNominationsList);
     saveToLocalStorage(newNominationsList);
   };
 
   const removeNomination = (movie) => {
+    movie.disableNominate = false;
     const newNominationsList = nominatedMoviesList.filter(
       (nominatedMoviesList) => nominatedMoviesList.imdbID !== movie.imdbID
     );
