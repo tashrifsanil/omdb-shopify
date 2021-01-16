@@ -3,10 +3,6 @@ body {
   color: #ffffff;
 }
 
-/* .TextField {
-  color: #ffffff;
-} */
-
 .navBar {
   box-sizing: border-box;
   margin: 0;
@@ -17,6 +13,7 @@ body {
 }
 
 .image-container {
+  /* background-color: red; */
   position: relative;
   transition: transform 0.2s;
 }
