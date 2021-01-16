@@ -13,6 +13,14 @@ import UpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { green, red } from "@material-ui/core/colors";
 import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
 import ChevronLeftOutlinedIcon from "@material-ui/icons/ChevronLeftOutlined";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+// import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from "@material-ui/core/DialogTitle";
+import TextField from "@material-ui/core/TextField";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +55,47 @@ const pageControlStyles = makeStyles((theme) => ({
 const PageControlFABS = (props) => {
   const classes = pageControlStyles();
   const theme = useTheme();
+
+  const [pageCtrlDialogVisible, setPageCtrlVisibility] = useState(false);
+  // Keeps track of the page number that the user inputs in the page control dialog
+  const [inputtedPageNumDialog, setInputtedPageNumDialog] = useState(1);
+
+  // If the user inputs a page thats out of range pageError becomes true
+  const [pageError, setPageError] = useState(false);
+  // Text that tells user whats wrong with the page number they entered
+  const [pageErrorText, setPageErrorText] = useState("");
+
+  const handlePageCtrlClose = () => {
+    setPageCtrlVisibility(false);
+  };
+
+  const handlePageCtrlDialogChange = (event) => {
+    if (
+      props.minPages <= event.target.value &&
+      event.target.value <= props.maxPages
+    ) {
+      setInputtedPageNumDialog(event.target.value);
+      setPageError(false);
+      setPageErrorText("");
+    } else {
+      setPageError(true);
+      setPageErrorText(
+        `Input a page number between ${props.minPages}-${props.maxPages}`
+      );
+    }
+  };
+
+  const handlePageCtrlDialogKeyPresses = (event) => {
+    if (event.key === "Enter") {
+      // Jumps to the page the user types on enter key pressed
+      if (!pageError) {
+        // The user typed a valid page number to jump to in the dialog
+        // so set that valid page number as the current page number
+        props.setCurrentPage(inputtedPageNumDialog);
+      }
+    }
+  };
+
   // currentPage is an integer indicating current page number
   var fabs = [
     {
@@ -65,9 +114,12 @@ const PageControlFABS = (props) => {
     {
       color: "secondary",
       className: classes.pageIndicatorFab,
-      icon: `${props.currentPage}/100`,
-      label: `${props.currentPage}/100`,
-      clickHandler: (event) => {},
+      icon: `${props.currentPage}/${props.maxPages}`,
+      label: `${props.currentPage}/${props.maxPages}`,
+      clickHandler: (event) => {
+        // Show page control dialog if this button is clicked
+        setPageCtrlVisibility(true);
+      },
     },
     {
       color: "inherit",
@@ -96,6 +148,39 @@ const PageControlFABS = (props) => {
           {fab.icon}
         </Fab>
       ))}
+      <Dialog
+        open={pageCtrlDialogVisible}
+        onClose={handlePageCtrlClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Enter Page Number</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="pageNumber"
+            label="Page Number"
+            type="number"
+            fullWidth
+            error={pageError}
+            helperText={pageErrorText}
+            onChange={handlePageCtrlDialogChange}
+            onKeyDown={handlePageCtrlDialogKeyPresses}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FileCopyIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handlePageCtrlClose} color="primary">
+            CLOSE
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };
@@ -104,6 +189,7 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [maxPages, setMaxPages] = useState(1);
 
   // This gets run everytime the state of searchTerm changes
   useEffect(() => {
@@ -126,6 +212,13 @@ function App() {
     // If search results returned are not empty
     if (responseJson.Search) {
       setMovies(responseJson.Search);
+      var totalResults = parseInt(responseJson.totalResults);
+      // Calculation to determine how many pages there will be in total
+      // based on totalResults
+      // responseJson.Search.length is how many cards there are page, i.e.
+      // how many results get returned by page
+      var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
+      setMaxPages(maxPagesCalc);
     }
   };
 
@@ -138,7 +231,7 @@ function App() {
           <MovieGrid movies={movies}></MovieGrid>
         </div>
         <PageControlFABS
-          maxPages={100}
+          maxPages={maxPages}
           minPages={1}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
