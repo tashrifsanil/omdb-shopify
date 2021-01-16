@@ -219,6 +219,7 @@ function App() {
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
   const [maxPages, setMaxPages] = useState(1);
 
+  const maxNominations = 5;
   // This only gets run when the app loads initially for the first time
 
   useEffect(() => {
@@ -245,10 +246,12 @@ function App() {
   }, [searchTerm, nominatedMoviesList]);
 
   const nominateMovie = (movie) => {
-    movie.disableNominate = true;
-    const newNominationsList = [...nominatedMoviesList, movie];
-    setNominatedMoviesList(newNominationsList);
-    saveToLocalStorage(newNominationsList);
+    if (nominatedMoviesList.length < maxNominations) {
+      movie.disableNominate = true;
+      const newNominationsList = [...nominatedMoviesList, movie];
+      setNominatedMoviesList(newNominationsList);
+      saveToLocalStorage(newNominationsList);
+    }
   };
 
   const removeNomination = (movie) => {
