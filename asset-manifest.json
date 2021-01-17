@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/omdb-shopify/static/css/main.9ffeff25.chunk.css",
-    "main.js": "/omdb-shopify/static/js/main.e108287d.chunk.js",
-    "main.js.map": "/omdb-shopify/static/js/main.e108287d.chunk.js.map",
-    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.6c4a8b01.js",
-    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.6c4a8b01.js.map",
+    "main.js": "/omdb-shopify/static/js/main.d38bafb4.chunk.js",
+    "main.js.map": "/omdb-shopify/static/js/main.d38bafb4.chunk.js.map",
+    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.4df27080.js",
+    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.4df27080.js.map",
     "static/css/2.1a02f21c.chunk.css": "/omdb-shopify/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.c0bcef54.chunk.js": "/omdb-shopify/static/js/2.c0bcef54.chunk.js",
-    "static/js/2.c0bcef54.chunk.js.map": "/omdb-shopify/static/js/2.c0bcef54.chunk.js.map",
-    "static/js/3.b21b6e37.chunk.js": "/omdb-shopify/static/js/3.b21b6e37.chunk.js",
-    "static/js/3.b21b6e37.chunk.js.map": "/omdb-shopify/static/js/3.b21b6e37.chunk.js.map",
+    "static/js/2.d856b367.chunk.js": "/omdb-shopify/static/js/2.d856b367.chunk.js",
+    "static/js/2.d856b367.chunk.js.map": "/omdb-shopify/static/js/2.d856b367.chunk.js.map",
+    "static/js/3.dd156d89.chunk.js": "/omdb-shopify/static/js/3.dd156d89.chunk.js",
+    "static/js/3.dd156d89.chunk.js.map": "/omdb-shopify/static/js/3.dd156d89.chunk.js.map",
     "index.html": "/omdb-shopify/index.html",
     "static/css/2.1a02f21c.chunk.css.map": "/omdb-shopify/static/css/2.1a02f21c.chunk.css.map",
     "static/css/main.9ffeff25.chunk.css.map": "/omdb-shopify/static/css/main.9ffeff25.chunk.css.map",
-    "static/js/2.c0bcef54.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.c0bcef54.chunk.js.LICENSE.txt",
+    "static/js/2.d856b367.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.d856b367.chunk.js.LICENSE.txt",
     "static/media/NavBar.css": "/omdb-shopify/static/media/BebasNeue-Regular.9aa03f9d.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.6c4a8b01.js",
+    "static/js/runtime-main.4df27080.js",
     "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.c0bcef54.chunk.js",
+    "static/js/2.d856b367.chunk.js",
     "static/css/main.9ffeff25.chunk.css",
-    "static/js/main.e108287d.chunk.js"
+    "static/js/main.d38bafb4.chunk.js"
   ]
 }
