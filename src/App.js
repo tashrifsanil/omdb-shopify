@@ -7,24 +7,15 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import AlertDialog from "./components/AlertDialog";
 import { Box } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import ChevronLeftOutlinedIcon from "@material-ui/icons/ChevronLeftOutlined";
-import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Fab from "@material-ui/core/Fab";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Grid from "@material-ui/core/Grid";
-import InputAdornment from "@material-ui/core/InputAdornment";
 import NominatedMovies from "./components/NominatedMovies";
 import PageControl from "./components/PageControl";
 import SearchAppBar from "./components/SearchAppBar";
 import SearchResults from "./components/SearchResults";
-import TextField from "@material-ui/core/TextField";
-import { grey } from "@material-ui/core/colors";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -73,11 +64,17 @@ function App() {
   }, [searchTerm, nominatedMoviesList]);
 
   const nominateMovie = (movie) => {
-    if (nominatedMoviesList.length < maxNominations) {
+    if (nominatedMoviesList.length < maxNominations - 1) {
       movie.disableNominate = true;
       const newNominationsList = [...nominatedMoviesList, movie];
       setNominatedMoviesList(newNominationsList);
       saveToLocalStorage(newNominationsList);
+    } else if (nominatedMoviesList.length === maxNominations - 1) {
+      movie.disableNominate = true;
+      const newNominationsList = [...nominatedMoviesList, movie];
+      setNominatedMoviesList(newNominationsList);
+      saveToLocalStorage(newNominationsList);
+      setNomCompleted(true);
     } else {
       setNomCompleted(true);
     }
@@ -88,7 +85,7 @@ function App() {
     const newNominationsList = nominatedMoviesList.filter(
       (nominatedMoviesList) => nominatedMoviesList.imdbID !== movie.imdbID
     );
-
+    setNomCompleted(false);
     setNominatedMoviesList(newNominationsList);
     saveToLocalStorage(newNominationsList);
   };
@@ -138,6 +135,11 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       ></PageControl>
+      <AlertDialog
+        hideButton={nominationsVisible}
+        open={nominationsCompleted}
+        nominations={nominatedMoviesList}
+      />
     </ThemeProvider>
   );
 }

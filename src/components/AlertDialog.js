@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -23,7 +24,7 @@ const AlertDialog = (props) => {
     } else {
       setOpen(false);
     }
-  }, [props.open]);
+  }, [props.open, props.nominations]);
 
   return (
     <div>

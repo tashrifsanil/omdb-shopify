@@ -29,13 +29,13 @@ const pageControlStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#f50057",
     },
-    bottom: theme.spacing(3),
-    right: theme.spacing(205),
+    bottom: theme.spacing(1),
+    right: theme.spacing(190),
   },
   pageIndicatorFab: {
     position: "absolute",
-    bottom: theme.spacing(3),
-    right: theme.spacing(213),
+    bottom: theme.spacing(1),
+    right: theme.spacing(198),
   },
   prevPageFab: {
     position: "absolute",
@@ -44,8 +44,8 @@ const pageControlStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#f50057",
     },
-    bottom: theme.spacing(3),
-    right: theme.spacing(221),
+    bottom: theme.spacing(1),
+    right: theme.spacing(206),
   },
 }));
 
