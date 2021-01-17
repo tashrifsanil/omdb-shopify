@@ -22,6 +22,8 @@ import Grid from "@material-ui/core/Grid";
 import SearchResults from "./components/SearchResults";
 import NominatedMovies from "./components/NominatedMovies";
 import Typography from "@material-ui/core/Typography";
+import AlertDialog from "./components/AlertDialog";
+import Container from "@material-ui/core/Container";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -219,6 +221,7 @@ function App() {
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
   const [maxPages, setMaxPages] = useState(1);
 
+  const [nominationsCompleted, setNomCompleted] = useState(false);
   const maxNominations = 5;
   // This only gets run when the app loads initially for the first time
 
@@ -251,6 +254,8 @@ function App() {
       const newNominationsList = [...nominatedMoviesList, movie];
       setNominatedMoviesList(newNominationsList);
       saveToLocalStorage(newNominationsList);
+    } else {
+      setNomCompleted(true);
     }
   };
 
@@ -278,7 +283,7 @@ function App() {
 
   return (
     // Use bootstrap styles for root container
-    <>
+    <Container>
       <NavBar setSearchTerm={setSearchTerm} />
       <Grid container className={classes.root} spacing={6} xs={12}>
         <Grid item xs={3} direction={"column"} alignItems="center">
@@ -293,7 +298,7 @@ function App() {
             onNominateClicked={nominateMovie}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={3} align="center">
           {nominationsVisible ? (
             <Typography variant="h5" align="center">
               Nominations
@@ -303,15 +308,21 @@ function App() {
             movies={nominatedMoviesList}
             onRemoveNominationClicked={removeNomination}
           />
+          <AlertDialog
+            hideButton={nominationsVisible}
+            open={nominationsCompleted}
+            nominations={nominatedMoviesList}
+          />
         </Grid>
       </Grid>
+
       <PageControlFABS
         maxPages={maxPages}
         minPages={1}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       ></PageControlFABS>
-    </>
+    </Container>
   );
 }
 
