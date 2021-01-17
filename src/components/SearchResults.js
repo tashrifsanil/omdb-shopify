@@ -11,7 +11,7 @@ const SearchResults = (props) => {
     console.log("Search term was changed, ", props.searchTerm);
     searchMovieRequest();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.searchTerm, props.currentPage]);
+  }, [props.searchTerm, props.currentPage, props.nominatedMoviesList]);
 
   const searchMovieRequest = async () => {
     const url =

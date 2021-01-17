@@ -57,6 +57,8 @@ function App() {
     // Search term has changed, if it's more than 3 characters show search results
     if (searchTerm.length >= 3) {
       setSearchResultsVisibility(true);
+    } else if (searchTerm.length === 0) {
+      setSearchResultsVisibility(false);
     }
     if (nominatedMoviesList.length > 0) {
       setNominationsVisibility(true);
@@ -93,12 +95,6 @@ function App() {
   const saveToLocalStorage = (items) => {
     localStorage.setItem("omdb-app-nominations", JSON.stringify(items));
   };
-  // // This gets run everytime the state of searchTerm changes
-  // useEffect(() => {
-  //   console.log("Search term was changed, ", searchTerm);
-  //   searchMovieRequest();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [searchTerm, currentPage]);
 
   const theme = createMuiTheme({
     palette: {
@@ -113,13 +109,15 @@ function App() {
       <Grid container direction="row">
         <Grid item container direction="column" xs={5}>
           <Grid item>
-            <SearchResults
-              searchTerm={searchTerm}
-              currentPage={currentPage}
-              setMaxPages={setMaxPages}
-              onNominateClicked={nominateMovie}
-              nominatedMoviesList={nominatedMoviesList}
-            ></SearchResults>
+            {searchResultsVisible ? (
+              <SearchResults
+                searchTerm={searchTerm}
+                currentPage={currentPage}
+                setMaxPages={setMaxPages}
+                onNominateClicked={nominateMovie}
+                nominatedMoviesList={nominatedMoviesList}
+              ></SearchResults>
+            ) : null}
           </Grid>
         </Grid>
         <Grid item xs={6}>
