@@ -1,50 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-import AddIcon from "@material-ui/icons/Add";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-  },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    flex: "1 0 auto",
-    height: 100,
-  },
-  title: {
-    width: 140,
-  },
-  cover: {
-    width: 151,
-    height: 170,
-    // width: "100%",
-    // height: "100%",
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(15),
-    // paddingBottom: theme.spacing(0),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
-}));
+import SearchResultCard from "./SearchResultCard";
 
 const SearchResults = (props) => {
-  const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
   const [movies, setMovies] = useState([]);
 
   // This gets run everytime the state of searchTerm changes
@@ -106,49 +65,15 @@ const SearchResults = (props) => {
     }
   };
 
-  const handleNominateClicked = (movie) => {
-    console.log("Nominated ", movie.Title);
-    props.onNominateClicked(movie);
-  };
-
   return (
     <Grid container>
       {movies.map((movie, index) => {
         return (
           <Grid item>
-            <Card className={classes.root}>
-              <CardMedia
-                className={classes.cover}
-                image={movie.Poster}
-                title={movie.imdbID}
-              />
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
-                  <Typography
-                    className={classes.title}
-                    component="h5"
-                    variant="h5"
-                  >
-                    {movie.Title}
-                    {/* Live from space */}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {movie.Year}
-                  </Typography>
-                </CardContent>
-                <div className={classes.controls}>
-                  <IconButton
-                    aria-label="nominate"
-                    disabled={movie.disableNominate}
-                    onClick={() => {
-                      props.onNominateClicked(movie);
-                    }}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </Card>
+            <SearchResultCard
+              movie={movie}
+              onNominateClicked={props.onNominateClicked}
+            />
           </Grid>
         );
       })}
