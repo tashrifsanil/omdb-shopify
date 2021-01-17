@@ -12,7 +12,7 @@ import "./NavBar.css";
 const useStyles = makeStyles((theme) => ({
   OMDBTitle: {
     fontFamily: "BebasNeue",
-    fontSize: "300%",
+    fontSize: "250%",
     width: "100%",
   },
   appBar: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   movieIcon: {
     // width: "3%",
     // height: "3%",
-    fontSize: "310%",
+    fontSize: "270%",
     marginRight: theme.spacing(2),
     color: "#ff316f",
     // transform: "rotate(90deg)",

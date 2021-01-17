@@ -40,13 +40,8 @@ const useStyles = makeStyles((theme) => ({
 const MovieMoreInfo = (props) => {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
   const [additionalMovieData, setAdditionalMovieData] = React.useState({});
   const [imdbID, setImdbID] = React.useState("");
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const getAdditionalMovieData = async () => {
     console.log("Get additional data ");
@@ -62,6 +57,7 @@ const MovieMoreInfo = (props) => {
     if (props.movie.imdbID) {
       setImdbID(props.movie.imdbID);
       getAdditionalMovieData();
+    } else {
     }
   }, [props.movie]);
 
@@ -74,7 +70,6 @@ const MovieMoreInfo = (props) => {
       scroll={"body"}
       open={props.open}
       keepMounted
-      onClose={handleClose}
     >
       {props.visible ? (
         <Paper className={classes.Paper}>

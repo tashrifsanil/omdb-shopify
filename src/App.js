@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import MovieGrid from "./components/MovieGrid";
 import NavBar from "./components/NavBar";
 import Button from "@material-ui/core/Button";
 import Fab from "@material-ui/core/Fab";
@@ -23,6 +22,8 @@ import SearchResults from "./components/SearchResults";
 import NominatedMovies from "./components/NominatedMovies";
 import Typography from "@material-ui/core/Typography";
 import AlertDialog from "./components/AlertDialog";
+import MovieMoreInfo from "./components/MovieMoreInfo";
+
 import Container from "@material-ui/core/Container";
 
 const pageControlStyles = makeStyles((theme) => ({
@@ -39,13 +40,13 @@ const pageControlStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#f50057",
     },
-    bottom: theme.spacing(4),
-    right: theme.spacing(4),
+    bottom: theme.spacing(3),
+    right: theme.spacing(205),
   },
   pageIndicatorFab: {
     position: "absolute",
-    bottom: theme.spacing(4),
-    right: theme.spacing(12),
+    bottom: theme.spacing(3),
+    right: theme.spacing(213),
   },
   prevPageFab: {
     position: "absolute",
@@ -54,8 +55,8 @@ const pageControlStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: "#f50057",
     },
-    bottom: theme.spacing(4),
-    right: theme.spacing(20),
+    bottom: theme.spacing(3),
+    right: theme.spacing(221),
   },
 }));
 
@@ -223,7 +224,16 @@ function App() {
 
   const [nominationsCompleted, setNomCompleted] = useState(false);
   const maxNominations = 5;
+
+  const [showMovieMoreInfo, setShowMovieMoreInfo] = useState(false);
+  // The movie to display in more info section
+  const [movie4MoreInfo, setMovie4MoreInfo] = useState({});
   // This only gets run when the app loads initially for the first time
+
+  const onSearchEntryClicked = (movie) => {
+    setMovie4MoreInfo(movie);
+    setShowMovieMoreInfo(true);
+  };
 
   useEffect(() => {
     const nominatedMovies = JSON.parse(
@@ -283,21 +293,17 @@ function App() {
 
   return (
     // Use bootstrap styles for root container
-    <Container>
+    <>
       <NavBar setSearchTerm={setSearchTerm} />
       <Grid container className={classes.root} spacing={6} xs={12}>
         <Grid item xs={3} direction={"column"} alignItems="center">
-          {searchResultsVisible ? (
-            <Typography variant="h5" align="center">
-              Search Results
-            </Typography>
-          ) : null}
           <SearchResults
             searchTerm={searchTerm}
             nominatedMoviesList={nominatedMoviesList}
             onNominateClicked={nominateMovie}
             setMaxPages={setMaxPages}
             currentPage={currentPage}
+            onEntryClicked={onSearchEntryClicked}
           />
         </Grid>
         <Grid item xs={3} align="center">
@@ -316,6 +322,9 @@ function App() {
             nominations={nominatedMoviesList}
           />
         </Grid>
+        <Grid item xs={3} direction={"column"} alignItems="center">
+          <MovieMoreInfo visible={showMovieMoreInfo} movie={movie4MoreInfo} />
+        </Grid>
       </Grid>
 
       <PageControlFABS
@@ -324,7 +333,7 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       ></PageControlFABS>
-    </Container>
+    </>
   );
 }
 
