@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import MovieInfoDialog from "./MovieInfoDialog";
 
 // This class is mainly used to display movie text when the user hovers the curor over a movie poster
 const MovieMoreInfo = (props) => {

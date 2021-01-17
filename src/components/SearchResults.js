@@ -106,7 +106,7 @@ const SearchResults = (props) => {
               dense
               button
               onClick={() => {
-                console.log("clickedd search result");
+                props.onEntryClicked(movie);
               }}
             >
               <ListItemIcon>
