@@ -28,11 +28,11 @@ const AlertDialog = (props) => {
 
   return (
     <div>
-      {props.hideButton ? (
+      {/* {props.hideButton ? (
         <Button variant="outlined" color="primary" onClick={handleClickOpen}>
           SUBMIT
         </Button>
-      ) : null}
+      ) : null} */}
       <Dialog
         open={open}
         onClose={handleClose}
