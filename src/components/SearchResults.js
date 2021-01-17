@@ -108,8 +108,8 @@ const SearchResults = (props) => {
       // based on totalResults
       // responseJson.Search.length is how many cards there are page, i.e.
       // how many results get returned by page
-      // var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
-      // props.setMaxPages(maxPagesCalc);
+      var maxPagesCalc = Math.ceil(totalResults / 10);
+      props.setMaxPages(maxPagesCalc);
     }
   };
 
