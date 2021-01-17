@@ -296,6 +296,8 @@ function App() {
             searchTerm={searchTerm}
             nominatedMoviesList={nominatedMoviesList}
             onNominateClicked={nominateMovie}
+            setMaxPages={setMaxPages}
+            currentPage={currentPage}
           />
         </Grid>
         <Grid item xs={3} align="center">
