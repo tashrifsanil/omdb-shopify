@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import AddIcon from "@material-ui/icons/Add";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -17,35 +12,18 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  resultEntry: {
+    alignItems: "flex-start",
+  },
   root: {
-    display: "flex",
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.black,
+    maxHeight: "100%",
+    overflow: "auto",
   },
-  details: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    flex: "1 0 auto",
-    height: 100,
-  },
-  title: {
-    width: 140,
-  },
-  cover: {
-    width: 151,
-    height: 170,
-    // width: "100%",
-    // height: "100%",
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(15),
-    // paddingBottom: theme.spacing(0),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
+  nominateIcon: {
+    color: "#55ff00",
   },
 }));
 
@@ -119,47 +97,59 @@ const SearchResults = (props) => {
   };
 
   return (
-    <Grid container>
-      {movies.map((movie, index) => {
-        return (
-          <Grid item>
-            <Card className={classes.root}>
-              <CardMedia
-                className={classes.cover}
-                image={movie.Poster}
-                title={movie.imdbID}
+    <Container>
+      <List className={classes.root}>
+        {movies.map((movie, index) => {
+          return (
+            <ListItem
+              key={movie.imdbID}
+              role={undefined}
+              dense
+              button
+              onClick={() => {
+                props.onEntryClicked(movie);
+              }}
+            >
+              <ListItemIcon>
+                <img src={movie.Poster} alt="movie" width={50}></img>
+              </ListItemIcon>
+              <ListItemText
+                className={classes.resultEntry}
+                primary={`${movie.Title} - (${movie.Year})`}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className={classes.inline}
+                      color="white"
+                    ></Typography>
+                    ImDB Link
+                  </React.Fragment>
+                }
               />
-              <div className={classes.details}>
-                <CardContent className={classes.content}>
-                  <Typography
-                    className={classes.title}
-                    component="h5"
-                    variant="h5"
-                  >
-                    {movie.Title}
-                    {/* Live from space */}
-                  </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    {movie.Year}
-                  </Typography>
-                </CardContent>
-                <div className={classes.controls}>
-                  <IconButton
-                    aria-label="nominate"
-                    disabled={movie.disableNominate}
-                    onClick={() => {
-                      props.onNominateClicked(movie);
-                    }}
-                  >
-                    <AddIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </Card>
-          </Grid>
-        );
-      })}
-    </Grid>
+
+              <ListItemSecondaryAction>
+                <IconButton
+                  edge="end"
+                  aria-label="nominate"
+                  disabled={movie.disableNominate}
+                  onClick={() => {
+                    // movie.disableNominate = true;
+                    console.log("movie clickeddd", movie.Title);
+                    props.onNominateClicked(movie);
+                  }}
+                >
+                  {!movie.disableNominate ? (
+                    <AddCircleIcon className={classes.nominateIcon} />
+                  ) : null}
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          );
+        })}
+      </List>
+    </Container>
   );
 };
 

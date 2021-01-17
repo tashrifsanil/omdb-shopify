@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import AddIcon from "@material-ui/icons/Add";
@@ -48,7 +48,6 @@ const SimpleCard = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  useEffect(() => {}, [props.movie.disableNominate]);
   return (
     <Card className={classes.root}>
       <CardMedia

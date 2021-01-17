@@ -1,36 +1,29 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import React, { useState, useEffect } from "react";
-import NavBar from "./components/NavBar";
-import Button from "@material-ui/core/Button";
-import Fab from "@material-ui/core/Fab";
+
+import React, { useEffect, useState } from "react";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { grey } from "@material-ui/core/colors";
-import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
+
+import AlertDialog from "./components/AlertDialog";
+import { Box } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
 import ChevronLeftOutlinedIcon from "@material-ui/icons/ChevronLeftOutlined";
+import ChevronRightOutlinedIcon from "@material-ui/icons/ChevronRightOutlined";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 // import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from "@material-ui/core/DialogTitle";
-import TextField from "@material-ui/core/TextField";
+import Fab from "@material-ui/core/Fab";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import SearchResults from "./components/SearchResults";
+import InputAdornment from "@material-ui/core/InputAdornment";
 import NominatedMovies from "./components/NominatedMovies";
-import Typography from "@material-ui/core/Typography";
-import AlertDialog from "./components/AlertDialog";
-import MovieMoreInfo from "./components/MovieMoreInfo";
-import MovieCard from "./components/MovieCard";
-import SimpleCard from "./components/SimpleCard";
-import Content from "./components/Content";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import Container from "react-bootstrap/Container";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { Box } from "@material-ui/core";
+import SearchAppBar from "./components/SearchAppBar";
+import SearchResults from "./components/SearchResults";
+import TextField from "@material-ui/core/TextField";
+import { grey } from "@material-ui/core/colors";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -310,55 +303,30 @@ function App() {
   return (
     // Use bootstrap styles for root container
     <ThemeProvider theme={theme}>
-      <NavBar />
-      <Grid container direction="column" xs={5}>
-        <Container fluid="true">
-          <Row noGutters="true" className={classes.row}>
-            Search Results
-          </Row>
-          <Row noGutters="true" className={classes.row}>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-          </Row>
-          <Row noGutters="true" className={classes.row}>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-            <Col className={classes.col}>
-              <SimpleCard />
-            </Col>
-          </Row>
-        </Container>
+      <SearchAppBar setSearchTerm={setSearchTerm} />
+      <Grid container direction="row">
+        <Grid item container direction="column" xs={5}>
+          <Grid item>
+            <SearchResults
+              searchTerm={searchTerm}
+              onNominateClicked={nominateMovie}
+              nominatedMoviesList={nominatedMoviesList}
+            ></SearchResults>
+          </Grid>
+        </Grid>
+        <Grid item xs={6}>
+          <NominatedMovies
+            movies={nominatedMoviesList}
+            onRemoveNominationClicked={removeNomination}
+          />
+        </Grid>
       </Grid>
-
-      <PageControlFABS
+      {/* <PageControlFABS
         maxPages={maxPages}
         minPages={1}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
-      ></PageControlFABS>
+      ></PageControlFABS> */}
     </ThemeProvider>
   );
 }

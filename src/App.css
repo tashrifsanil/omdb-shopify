@@ -1,45 +1,4 @@
 body {
-  background: #141414;
+  background: #303030;
   color: #ffffff;
-}
-
-.navBar {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: #141414;
-  font-family: "Open Sans", sans-serif;
-  display: flex;
-}
-
-.image-container {
-  /* background-color: red; */
-  position: relative;
-  transition: transform 0.2s;
-}
-
-.image-container:hover {
-  /* Change cursor to pointer on poster hover */
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
-.image-container:hover .overlay {
-  opacity: 1;
-}
-
-.UIHeader {
-  font-family: "Open Sans";
-}
-
-.overlay {
-  position: absolute;
-  background: rgba(0, 0, 0, 0.4);
-  width: 100%;
-  transition: 0.5s ease;
-  opacity: 0;
-  font-size: 20px;
-  padding: 20px;
-  text-align: center;
-  height: 10%;
 }
