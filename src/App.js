@@ -23,8 +23,14 @@ import NominatedMovies from "./components/NominatedMovies";
 import Typography from "@material-ui/core/Typography";
 import AlertDialog from "./components/AlertDialog";
 import MovieMoreInfo from "./components/MovieMoreInfo";
-
-import Container from "@material-ui/core/Container";
+import MovieCard from "./components/MovieCard";
+import SimpleCard from "./components/SimpleCard";
+import Content from "./components/Content";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { Box } from "@material-ui/core";
 
 const pageControlStyles = makeStyles((theme) => ({
   root: {
@@ -61,6 +67,10 @@ const pageControlStyles = makeStyles((theme) => ({
 }));
 
 const searchResultsStyles = makeStyles((theme) => ({
+  row: {},
+  col: {
+    margin: "0.3%",
+  },
   root: {
     flexGrow: 1,
     // justifyContent: "center",
@@ -291,40 +301,56 @@ function App() {
 
   const classes = searchResultsStyles();
 
+  const theme = createMuiTheme({
+    palette: {
+      type: "dark",
+    },
+  });
+
   return (
     // Use bootstrap styles for root container
-    <>
-      <NavBar setSearchTerm={setSearchTerm} />
-      <Grid container className={classes.root} spacing={6} xs={12}>
-        <Grid item xs={3} direction={"column"} alignItems="center">
-          <SearchResults
-            searchTerm={searchTerm}
-            nominatedMoviesList={nominatedMoviesList}
-            onNominateClicked={nominateMovie}
-            setMaxPages={setMaxPages}
-            currentPage={currentPage}
-            onEntryClicked={onSearchEntryClicked}
-          />
-        </Grid>
-        <Grid item xs={3} align="center">
-          {nominationsVisible ? (
-            <Typography variant="h5" align="center">
-              Nominations
-            </Typography>
-          ) : null}
-          <NominatedMovies
-            movies={nominatedMoviesList}
-            onRemoveNominationClicked={removeNomination}
-          />
-          <AlertDialog
-            hideButton={nominationsVisible}
-            open={nominationsCompleted}
-            nominations={nominatedMoviesList}
-          />
-        </Grid>
-        <Grid item xs={3} direction={"column"} alignItems="center">
-          <MovieMoreInfo visible={showMovieMoreInfo} movie={movie4MoreInfo} />
-        </Grid>
+    <ThemeProvider theme={theme}>
+      <NavBar />
+      <Grid container direction="column" xs={5}>
+        <Container fluid="true">
+          <Row noGutters="true" className={classes.row}>
+            Search Results
+          </Row>
+          <Row noGutters="true" className={classes.row}>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+          </Row>
+          <Row noGutters="true" className={classes.row}>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+            <Col className={classes.col}>
+              <SimpleCard />
+            </Col>
+          </Row>
+        </Container>
       </Grid>
 
       <PageControlFABS
@@ -333,7 +359,7 @@ function App() {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       ></PageControlFABS>
-    </>
+    </ThemeProvider>
   );
 }
 
