@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/omdb-shopify/static/css/main.9ffeff25.chunk.css",
-    "main.js": "/omdb-shopify/static/js/main.d38bafb4.chunk.js",
-    "main.js.map": "/omdb-shopify/static/js/main.d38bafb4.chunk.js.map",
+    "main.js": "/omdb-shopify/static/js/main.c8d6b084.chunk.js",
+    "main.js.map": "/omdb-shopify/static/js/main.c8d6b084.chunk.js.map",
     "runtime-main.js": "/omdb-shopify/static/js/runtime-main.4df27080.js",
     "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.4df27080.js.map",
     "static/css/2.1a02f21c.chunk.css": "/omdb-shopify/static/css/2.1a02f21c.chunk.css",
@@ -21,6 +21,6 @@
     "static/css/2.1a02f21c.chunk.css",
     "static/js/2.d856b367.chunk.js",
     "static/css/main.9ffeff25.chunk.css",
-    "static/js/main.d38bafb4.chunk.js"
+    "static/js/main.c8d6b084.chunk.js"
   ]
 }
