@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
-import AddIcon from "@material-ui/icons/Add";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import IconButton from "@material-ui/core/IconButton";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
+import React from "react";
+import RemoveIcon from "@material-ui/icons/Remove";
 import SkipNextIcon from "@material-ui/icons/SkipNext";
 import SkipPreviousIcon from "@material-ui/icons/SkipPrevious";
 import Typography from "@material-ui/core/Typography";
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   title: {
-    width: 140,
+    // width: 140,
   },
   cover: {
     width: 151,
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   controls: {
     display: "flex",
     alignItems: "center",
-    paddingLeft: theme.spacing(15),
+    paddingLeft: theme.spacing(100),
     // paddingBottom: theme.spacing(0),
   },
   playIcon: {
@@ -44,11 +44,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SimpleCard = (props) => {
+const NominatedMovieCard = (props) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  useEffect(() => {}, [props.movie.disableNominate]);
   return (
     <Card className={classes.root}>
       <CardMedia
@@ -69,16 +68,15 @@ const SimpleCard = (props) => {
         <div className={classes.controls}>
           <IconButton
             aria-label="nominate"
-            disabled={props.movie.disableNominate}
             onClick={() => {
-              props.onNominateClicked(props.movie);
+              props.onRemoveNominationClicked(props.movie);
             }}
           >
-            <AddIcon />
+            <RemoveIcon />
           </IconButton>
         </div>
       </div>
     </Card>
   );
 };
-export default SimpleCard;
+export default NominatedMovieCard;

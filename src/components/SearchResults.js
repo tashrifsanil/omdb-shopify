@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+import Grid from "@material-ui/core/Grid";
+import Row from "react-bootstrap/Row";
+import SimpleCard from "./SimpleCard";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   resultEntry: {
@@ -85,8 +82,8 @@ const SearchResults = (props) => {
       // based on totalResults
       // responseJson.Search.length is how many cards there are page, i.e.
       // how many results get returned by page
-      var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
-      props.setMaxPages(maxPagesCalc);
+      // var maxPagesCalc = Math.ceil(totalResults / responseJson.Search.length);
+      // props.setMaxPages(maxPagesCalc);
     }
   };
 
@@ -96,59 +93,38 @@ const SearchResults = (props) => {
   };
 
   return (
-    <Container>
-      <List className={classes.root}>
-        {movies.map((movie, index) => {
-          return (
-            <ListItem
-              key={movie.imdbID}
-              role={undefined}
-              dense
-              button
-              onClick={() => {
-                props.onEntryClicked(movie);
-              }}
-            >
-              <ListItemIcon>
-                <img src={movie.Poster} alt="movie" width={50}></img>
-              </ListItemIcon>
-              <ListItemText
-                className={classes.resultEntry}
-                primary={`${movie.Title} - (${movie.Year})`}
-                secondary={
-                  <React.Fragment>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.inline}
-                      color="white"
-                    ></Typography>
-                    ImDB Link
-                  </React.Fragment>
-                }
-              />
-
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  aria-label="nominate"
-                  disabled={movie.disableNominate}
-                  onClick={() => {
-                    // movie.disableNominate = true;
-                    console.log("movie clickeddd", movie.Title);
-                    props.onNominateClicked(movie);
-                  }}
-                >
-                  {!movie.disableNominate ? (
-                    <AddCircleIcon className={classes.nominateIcon} />
-                  ) : null}
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          );
-        })}
-      </List>
-    </Container>
+    // <Container fluid="true">
+    //   <Row noGutters="true" className={classes.row}>
+    //     {movies.slice(0, 5).map((movie, index) => {
+    //       return (
+    //         <Col className={classes.col}>
+    //           <SimpleCard movie={movie} />
+    //         </Col>
+    //       );
+    //     })}
+    //   </Row>
+    //   <Row noGutters="true" className={classes.row}>
+    //     {movies.slice(5, 11).map((movie, index) => {
+    //       return (
+    //         <Col className={classes.col}>
+    //           <SimpleCard movie={movie} />
+    //         </Col>
+    //       );
+    //     })}
+    //   </Row>
+    // </Container>
+    <Grid container>
+      {movies.map((movie, index) => {
+        return (
+          <Grid item>
+            <SimpleCard
+              movie={movie}
+              onNominateClicked={props.onNominateClicked}
+            />
+          </Grid>
+        );
+      })}
+    </Grid>
   );
 };
 
