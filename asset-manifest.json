@@ -1,26 +1,25 @@
 {
   "files": {
-    "main.css": "/omdb-shopify/static/css/main.9ffeff25.chunk.css",
-    "main.js": "/omdb-shopify/static/js/main.c8d6b084.chunk.js",
-    "main.js.map": "/omdb-shopify/static/js/main.c8d6b084.chunk.js.map",
-    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.4df27080.js",
-    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.4df27080.js.map",
+    "main.css": "/omdb-shopify/static/css/main.0c498960.chunk.css",
+    "main.js": "/omdb-shopify/static/js/main.bc9baea0.chunk.js",
+    "main.js.map": "/omdb-shopify/static/js/main.bc9baea0.chunk.js.map",
+    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.6bf2d362.js",
+    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.6bf2d362.js.map",
     "static/css/2.1a02f21c.chunk.css": "/omdb-shopify/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.d856b367.chunk.js": "/omdb-shopify/static/js/2.d856b367.chunk.js",
-    "static/js/2.d856b367.chunk.js.map": "/omdb-shopify/static/js/2.d856b367.chunk.js.map",
-    "static/js/3.dd156d89.chunk.js": "/omdb-shopify/static/js/3.dd156d89.chunk.js",
-    "static/js/3.dd156d89.chunk.js.map": "/omdb-shopify/static/js/3.dd156d89.chunk.js.map",
+    "static/js/2.9cbfefc6.chunk.js": "/omdb-shopify/static/js/2.9cbfefc6.chunk.js",
+    "static/js/2.9cbfefc6.chunk.js.map": "/omdb-shopify/static/js/2.9cbfefc6.chunk.js.map",
+    "static/js/3.2ae4182f.chunk.js": "/omdb-shopify/static/js/3.2ae4182f.chunk.js",
+    "static/js/3.2ae4182f.chunk.js.map": "/omdb-shopify/static/js/3.2ae4182f.chunk.js.map",
     "index.html": "/omdb-shopify/index.html",
     "static/css/2.1a02f21c.chunk.css.map": "/omdb-shopify/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.9ffeff25.chunk.css.map": "/omdb-shopify/static/css/main.9ffeff25.chunk.css.map",
-    "static/js/2.d856b367.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.d856b367.chunk.js.LICENSE.txt",
-    "static/media/NavBar.css": "/omdb-shopify/static/media/BebasNeue-Regular.9aa03f9d.ttf"
+    "static/css/main.0c498960.chunk.css.map": "/omdb-shopify/static/css/main.0c498960.chunk.css.map",
+    "static/js/2.9cbfefc6.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.9cbfefc6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.4df27080.js",
+    "static/js/runtime-main.6bf2d362.js",
     "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.d856b367.chunk.js",
-    "static/css/main.9ffeff25.chunk.css",
-    "static/js/main.c8d6b084.chunk.js"
+    "static/js/2.9cbfefc6.chunk.js",
+    "static/css/main.0c498960.chunk.css",
+    "static/js/main.bc9baea0.chunk.js"
   ]
 }
