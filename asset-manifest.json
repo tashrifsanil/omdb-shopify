@@ -1,25 +1,27 @@
 {
   "files": {
-    "main.css": "/omdb-shopify/static/css/main.0c498960.chunk.css",
-    "main.js": "/omdb-shopify/static/js/main.79e07c2f.chunk.js",
-    "main.js.map": "/omdb-shopify/static/js/main.79e07c2f.chunk.js.map",
-    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.0a27d699.js",
-    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.0a27d699.js.map",
-    "static/css/2.1a02f21c.chunk.css": "/omdb-shopify/static/css/2.1a02f21c.chunk.css",
-    "static/js/2.c404d625.chunk.js": "/omdb-shopify/static/js/2.c404d625.chunk.js",
-    "static/js/2.c404d625.chunk.js.map": "/omdb-shopify/static/js/2.c404d625.chunk.js.map",
-    "static/js/3.b859716e.chunk.js": "/omdb-shopify/static/js/3.b859716e.chunk.js",
-    "static/js/3.b859716e.chunk.js.map": "/omdb-shopify/static/js/3.b859716e.chunk.js.map",
+    "main.css": "/omdb-shopify/static/css/main.1bab8c96.chunk.css",
+    "main.js": "/omdb-shopify/static/js/main.5bdbd0b6.chunk.js",
+    "main.js.map": "/omdb-shopify/static/js/main.5bdbd0b6.chunk.js.map",
+    "runtime-main.js": "/omdb-shopify/static/js/runtime-main.69839a36.js",
+    "runtime-main.js.map": "/omdb-shopify/static/js/runtime-main.69839a36.js.map",
+    "static/css/2.820fe15f.chunk.css": "/omdb-shopify/static/css/2.820fe15f.chunk.css",
+    "static/js/2.1cfae96c.chunk.js": "/omdb-shopify/static/js/2.1cfae96c.chunk.js",
+    "static/js/2.1cfae96c.chunk.js.map": "/omdb-shopify/static/js/2.1cfae96c.chunk.js.map",
+    "static/js/3.98d7c2f8.chunk.js": "/omdb-shopify/static/js/3.98d7c2f8.chunk.js",
+    "static/js/3.98d7c2f8.chunk.js.map": "/omdb-shopify/static/js/3.98d7c2f8.chunk.js.map",
     "index.html": "/omdb-shopify/index.html",
-    "static/css/2.1a02f21c.chunk.css.map": "/omdb-shopify/static/css/2.1a02f21c.chunk.css.map",
-    "static/css/main.0c498960.chunk.css.map": "/omdb-shopify/static/css/main.0c498960.chunk.css.map",
-    "static/js/2.c404d625.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.c404d625.chunk.js.LICENSE.txt"
+    "static/css/2.820fe15f.chunk.css.map": "/omdb-shopify/static/css/2.820fe15f.chunk.css.map",
+    "static/css/main.1bab8c96.chunk.css.map": "/omdb-shopify/static/css/main.1bab8c96.chunk.css.map",
+    "static/js/2.1cfae96c.chunk.js.LICENSE.txt": "/omdb-shopify/static/js/2.1cfae96c.chunk.js.LICENSE.txt",
+    "static/media/imdbIcon.b9cd8583.svg": "/omdb-shopify/static/media/imdbIcon.b9cd8583.svg",
+    "static/media/index.css": "/omdb-shopify/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.0a27d699.js",
-    "static/css/2.1a02f21c.chunk.css",
-    "static/js/2.c404d625.chunk.js",
-    "static/css/main.0c498960.chunk.css",
-    "static/js/main.79e07c2f.chunk.js"
+    "static/js/runtime-main.69839a36.js",
+    "static/css/2.820fe15f.chunk.css",
+    "static/js/2.1cfae96c.chunk.js",
+    "static/css/main.1bab8c96.chunk.css",
+    "static/js/main.5bdbd0b6.chunk.js"
   ]
 }
