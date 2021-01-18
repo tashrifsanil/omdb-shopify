@@ -8,10 +8,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AlertDialog from "./components/AlertDialog";
 import { Box } from "@material-ui/core";
 // import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Fab from "@material-ui/core/Fab";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
 import Grid from "@material-ui/core/Grid";
+import MovieMoreInfo from "./components/MovieMoreInfo";
 import NominatedMovies from "./components/NominatedMovies";
 import PageControl from "./components/PageControl";
 import SearchAppBar from "./components/SearchAppBar";
@@ -37,6 +35,7 @@ function App() {
 
   const onSearchEntryClicked = (movie) => {
     setMovie4MoreInfo(movie);
+    console.log("Search Entry clicked ", movie4MoreInfo);
     setShowMovieMoreInfo(true);
   };
 
@@ -105,26 +104,34 @@ function App() {
   return (
     // Use bootstrap styles for root container
     <ThemeProvider theme={theme}>
-      <SearchAppBar setSearchTerm={setSearchTerm} />
-      <Grid container direction="row">
-        <Grid item container direction="column" xs={5}>
-          <Grid item>
-            {searchResultsVisible ? (
-              <SearchResults
-                searchTerm={searchTerm}
-                currentPage={currentPage}
-                setMaxPages={setMaxPages}
-                onNominateClicked={nominateMovie}
-                nominatedMoviesList={nominatedMoviesList}
-              ></SearchResults>
-            ) : null}
-          </Grid>
+      <Grid container direction="column">
+        <Grid item xs={12}>
+          <SearchAppBar setSearchTerm={setSearchTerm} />
         </Grid>
-        <Grid item xs={6}>
-          <NominatedMovies
-            movies={nominatedMoviesList}
-            onRemoveNominationClicked={removeNomination}
-          />
+        <Grid item xs={12} container direction="row">
+          <Grid item container direction="column" xs={5}>
+            <Grid item>
+              {searchResultsVisible ? (
+                <SearchResults
+                  searchTerm={searchTerm}
+                  currentPage={currentPage}
+                  setMaxPages={setMaxPages}
+                  onNominateClicked={nominateMovie}
+                  onSearchEntryClicked={onSearchEntryClicked}
+                  nominatedMoviesList={nominatedMoviesList}
+                ></SearchResults>
+              ) : null}
+            </Grid>
+          </Grid>
+          <Grid item xs={showMovieMoreInfo ? 3 : 7}>
+            <NominatedMovies
+              movies={nominatedMoviesList}
+              onRemoveNominationClicked={removeNomination}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <MovieMoreInfo visible={showMovieMoreInfo} movie={movie4MoreInfo} />
+          </Grid>
         </Grid>
       </Grid>
       <PageControl

@@ -72,6 +72,7 @@ const SearchResults = (props) => {
           <Grid item>
             <SearchResultCard
               movie={movie}
+              onSearchEntryClicked={props.onSearchEntryClicked}
               onNominateClicked={props.onNominateClicked}
             />
           </Grid>
