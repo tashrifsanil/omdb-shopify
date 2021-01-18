@@ -28,14 +28,11 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     width: 151,
     height: 170,
-    // width: "100%",
-    // height: "100%",
   },
   controls: {
     display: "flex",
     alignItems: "center",
     paddingLeft: theme.spacing(15),
-    // paddingBottom: theme.spacing(0),
   },
   nominateButtton: {
     "&:hover": {

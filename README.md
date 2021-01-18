@@ -2,6 +2,8 @@
 
 To use this app, just start searching for a movie title and search results (search term has to be atleast 3 characters) will appear on the left pane. Clicking on the red page indicator will bring up a page switcher dialog. Click the plus button on the search results to nominate, and the nominations will appear on the right pane. When you reach 5 nominations, a dialog will automatically pop up and show the movies you nominated
 
+Clicking on a search result will spawn up a layout which will give you more details on that specific movie
+
 # Access
 
 The app is hosted at https://tashrifsanil.github.io/omdb-shopify/
@@ -38,4 +40,3 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
