@@ -1,22 +1,13 @@
 import React, { useEffect } from "react";
 
-import Box from "@material-ui/core/Box";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Chip from "@material-ui/core/Chip";
-import Container from "@material-ui/core/Container";
 import Fab from "@material-ui/core/Fab";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Paper from "@material-ui/core/Paper";
 import TheatersIcon from "@material-ui/icons/Theaters";
 import ThumbUpIcon from "@material-ui/icons/ThumbUp";
 import Typography from "@material-ui/core/Typography";
 import imdbIcon from "../resources/icons/imdbIcon.svg";
 import { makeStyles } from "@material-ui/core/styles";
-import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -90,15 +81,7 @@ const MovieMoreInfo = (props) => {
   }, [props.movie]);
 
   return (
-    <
-      //  className={"moveMoreInfo"}
-      // overflow={"hidden"}
-      // fullWidth={true}
-      // maxWidth={"md"}
-      // scroll={"body"}
-      // open={props.open}
-      // keepMounted
-    >
+    <>
       {props.visible ? (
         <Card className={classes.root}>
           <Grid
@@ -150,7 +133,8 @@ const MovieMoreInfo = (props) => {
                     className={classes.rating}
                   >
                     <ThumbUpIcon className={classes.ratingMargin} />
-                    {additionalMovieData.Metascore}/100
+                    {additionalMovieData.Metascore}
+                    {additionalMovieData.Metascore !== "N/A" ? "/100" : null}
                   </Fab>
                   <Fab
                     variant="extended"

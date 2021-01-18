@@ -1,0 +1,13 @@
+ #!/bin/bash
+ 
+ ./git-timestamp-changer 238b6a7021663844b9f265c0f0c807e4f626c967 "Sun Jan 17 12:09:31 2021 -0500" 
+ ./git-timestamp-changer 00425ea77690096bccb4102bb3eeadc34fa4c46b "Sun Jan 17 17:39:54 2021 -0500"
+ ./git-timestamp-changer 5b5b0fee06f550108b6b4a2eddcf29bdee0f3e6b "Sun Jan 17 16:11:39 2021 -0500"
+ ./git-timestamp-changer e75278152b49126da2368e18c7e6b633bca0ba57 "Sun Jan 17 16:21:41 2021 -0500"
+ ./git-timestamp-changer be29cf32cf09e9dea5432a44d9707cdf749f808a "Sun Jan 17 16:45:51 2021 -0500"
+ ./git-timestamp-changer f0020824eb1601324f7e5b371d0a2f9dc7ecad22 "Sun Jan 17 17:25:32 2021 -0500"
+ ./git-timestamp-changer 61df760c3a5aad4ba363477968ad97e3d2d2ac5f "Sun Jan 17 17:41:58 2021 -0500"
+ ./git-timestamp-changer b9cbaf5e19b99f07511de140bcc8819f101ac2d4 "Sun Jan 17 17:47:14 2021 -0500"
+ ./git-timestamp-changer 005a22ff99aef3f2f22e9502b08eb7d368ceb62c "Sun Jan 17 21:13:31 2021 -0500"
+ ./git-timestamp-changer f91f5b88e483537f6ee422cef8b39662c12977ee "Sun Jan 17 22:03:57 2021 -0500"
+ ./git-timestamp-changer 0da0a1d958df19799d5b83eeacb777aa00dde845 "Sun Jan 17 22:38:28 2021 -0500"

@@ -8,7 +8,6 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 
 import AlertDialog from "./components/AlertDialog";
-import { Box } from "@material-ui/core";
 // import DialogContentText from '@material-ui/core/DialogContentText';
 import Grid from "@material-ui/core/Grid";
 import MovieMoreInfo from "./components/MovieMoreInfo";
@@ -17,6 +16,7 @@ import PageControl from "./components/PageControl";
 import SearchAppBar from "./components/SearchAppBar";
 import SearchResults from "./components/SearchResults";
 import Typography from "@material-ui/core/Typography";
+import { Helmet } from 'react-helmet';
 
 const useStyles = makeStyles((theme) => ({
   nominationsHeader: {
@@ -31,7 +31,6 @@ function App() {
   const [searchResultsVisible, setSearchResultsVisibility] = useState(false);
   const [nominationsVisible, setNominationsVisibility] = useState(false);
 
-  const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
   const [maxPages, setMaxPages] = useState(1);
@@ -40,9 +39,9 @@ function App() {
   const maxNominations = 5;
 
   const [showMovieMoreInfo, setShowMovieMoreInfo] = useState(false);
+
   // The movie to display in more info section
   const [movie4MoreInfo, setMovie4MoreInfo] = useState({});
-  // This only gets run when the app loads initially for the first time
 
   const onSearchEntryClicked = (movie) => {
     setMovie4MoreInfo(movie);
@@ -118,8 +117,11 @@ function App() {
   });
 
   return (
-    // Use bootstrap styles for root container
+ 
     <ThemeProvider theme={theme}>
+         <Helmet>
+          <title>OMDb Movies</title>
+        </Helmet>
       <Grid container direction="column">
         <Grid item xs={12}>
           <SearchAppBar setSearchTerm={setSearchTerm} />
