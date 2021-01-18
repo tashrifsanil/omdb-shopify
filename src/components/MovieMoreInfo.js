@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "100%",
   },
   rating: {
+    backgroundColor: theme.palette.info.main,
     width: "20%",
     fontSize: "100%",
   },
@@ -146,8 +147,7 @@ const MovieMoreInfo = (props) => {
                     variant="extended"
                     size="small"
                     color="primary"
-                    aria-label="add"
-                    className={classes.ratingMargin}
+                    className={classes.rating}
                   >
                     <ThumbUpIcon className={classes.ratingMargin} />
                     {additionalMovieData.Metascore}/100
@@ -156,7 +156,6 @@ const MovieMoreInfo = (props) => {
                     variant="extended"
                     size="small"
                     color="secondary"
-                    aria-label="add"
                     className={classes.ratingMargin}
                   >
                     {additionalMovieData.Rated}

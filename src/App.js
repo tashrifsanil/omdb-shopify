@@ -1,5 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import "fontsource-roboto";
+import "@fontsource/open-sans";
 
 import React, { useEffect, useState } from "react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -14,6 +16,15 @@ import NominatedMovies from "./components/NominatedMovies";
 import PageControl from "./components/PageControl";
 import SearchAppBar from "./components/SearchAppBar";
 import SearchResults from "./components/SearchResults";
+import Typography from "@material-ui/core/Typography";
+
+const useStyles = makeStyles((theme) => ({
+  nominationsHeader: {
+    paddingLeft: "1%",
+    fontFamily: "Open Sans Light",
+    width: "100%",
+  },
+}));
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,6 +69,7 @@ function App() {
       setSearchResultsVisibility(true);
     } else if (searchTerm.length === 0) {
       setSearchResultsVisibility(false);
+      setShowMovieMoreInfo(false);
     }
     if (nominatedMoviesList.length > 0) {
       setNominationsVisibility(true);
@@ -95,6 +107,10 @@ function App() {
     localStorage.setItem("omdb-app-nominations", JSON.stringify(items));
   };
 
+  const classes = useStyles();
+
+  // dark mode theming
+
   const theme = createMuiTheme({
     palette: {
       type: "dark",
@@ -123,11 +139,24 @@ function App() {
               ) : null}
             </Grid>
           </Grid>
-          <Grid item xs={showMovieMoreInfo ? 3 : 7}>
-            <NominatedMovies
-              movies={nominatedMoviesList}
-              onRemoveNominationClicked={removeNomination}
-            />
+          <Grid
+            item
+            container
+            direction="row"
+            xs={showMovieMoreInfo ? 3 : 6}
+            justify="center"
+          >
+            <Grid item xs={12}>
+              {nominatedMoviesList.length ? (
+                <Typography className={classes.nominationsHeader} variant="h4">
+                  Nominations
+                </Typography>
+              ) : null}
+              <NominatedMovies
+                movies={nominatedMoviesList}
+                onRemoveNominationClicked={removeNomination}
+              />
+            </Grid>
           </Grid>
           <Grid item xs={4}>
             <MovieMoreInfo visible={showMovieMoreInfo} movie={movie4MoreInfo} />

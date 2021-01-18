@@ -1169,6 +1169,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/open-sans@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-4.1.0.tgz#d44b4495bd23d78018675e4e79973894e393c0ed"
+  integrity sha512-sWDAAr6ESHJdBKXse6njvZem4sTZLILkugaEfAvpdFiaKBh2RnXTa4DJllDh5LzP0MLMUrfj/JAjMbKxWFo6pQ==
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -5265,6 +5270,11 @@ follow-redirects@^1.0.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.0.tgz#b42e8d93a2a7eea5ed88633676d6597bc8e384db"
   integrity sha512-aq6gF1BEKje4a9i9+5jimNFIpq4Q1WiwBToeRK5NvZBd/TRsmW8BsJfOEGkr76TbOyPVD3OVDN910EcUNtRYEA==
+
+fontsource-roboto@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/fontsource-roboto/-/fontsource-roboto-4.0.0.tgz#35eacd4fb8d90199053c0eec9b34a57fb79cd820"
+  integrity sha512-zD6L8nvdWRcwSgp4ojxFchG+MPj8kXXQKDEAH9bfhbxy+lkpvpC1WgAK0lCa4dwobv+hvAe0uyHaawcgH7WH/g==
 
 for-in@^1.0.2:
   version "1.0.2"
