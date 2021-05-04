@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+// import "./App.css";
 import "fontsource-roboto";
 import "@fontsource/open-sans";
 
@@ -145,8 +145,16 @@ function App() {
       <Box>
         <Grid container direction="row" >
           <Grid item xs={12}>
-            <SearchField />
+            <SearchField setSearchTerm={setSearchTerm}/>
           </Grid>
+          <Grid item xs={1}/>
+          <Grid item xs={8}>
+            <SearchResults searchTerm={searchTerm}/>
+          </Grid>
+          <Grid item xs={2}/>
+          <Grid item xs={1}/>
+
+
         </Grid>
       </Box>
     </ThemeProvider>

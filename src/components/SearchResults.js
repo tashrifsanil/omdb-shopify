@@ -61,24 +61,66 @@ const SearchResults = (props) => {
       // responseJson.Search.length is how many cards there are page, i.e.
       // how many results get returned by page
       var maxPagesCalc = Math.ceil(totalResults / 10);
-      props.setMaxPages(maxPagesCalc);
+      // props.setMaxPages(maxPagesCalc);
     }
   };
 
+  const shouldBeOnNewRow = (index, arrayLength) => {
+    var onNewRow = false;
+
+    if (index == 0 || index >= arrayLength / 2) {
+      onNewRow = true;
+    }
+
+    return onNewRow;
+  }
+
+  const sliceMap = (fn, from, toExclusive, array) => {
+    const len = toExclusive - from;
+    const mapped = Array(len);
+
+    for (let i = 0; i < len; i++) {
+      mapped[i] = fn(array[i + from], i);
+    }
+
+    return mapped;
+  };
+
+
+
+
   return (
-    <Grid container>
-      {movies.map((movie, index) => {
-        return (
-          <Grid item>
-            <SearchResultCard
-              movie={movie}
-              onSearchEntryClicked={props.onSearchEntryClicked}
-              onNominateClicked={props.onNominateClicked}
-            />
-          </Grid>
-        );
-      })}
-    </Grid>
+    <>
+      <Grid item container xs={12} spacing={2}>
+        <Grid item xs={1} />
+        {sliceMap((movie, index) => {
+          return (
+            <Grid item xs={2}>
+              <SearchResultCard
+                movie={movie}
+                onSearchEntryClicked={props.onSearchEntryClicked}
+                onNominateClicked={props.onNominateClicked}
+              />
+            </Grid>
+          )
+        }, 0, movies.length / 2, movies)}
+        <Grid item xs={1} />
+
+        <Grid item xs={1} />
+        {sliceMap((movie, index) => {
+          return (
+            <Grid item xs={2}>
+              <SearchResultCard
+                movie={movie}
+                onSearchEntryClicked={props.onSearchEntryClicked}
+                onNominateClicked={props.onNominateClicked}
+              />
+            </Grid>
+          )
+        }, movies.length / 2, movies.length, movies)}
+        <Grid item xs={1} />
+      </Grid>
+    </>
   );
 };
 

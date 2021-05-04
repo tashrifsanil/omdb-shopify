@@ -16,6 +16,7 @@ import SearchIcon from "@material-ui/icons/Search";
 const useStyles = makeStyles((theme) => ({
     textField: {
         paddingTop: theme.spacing(4),
+        paddingBottom: theme.spacing(4),
     }
 }));
 
@@ -32,6 +33,7 @@ const SearchField = (props) => {
                     placeholder="Search for Movies"
                     fullWidth={true}
                     variant={'outlined'}
+                    onChange={(event) => props.setSearchTerm(event.target.value)}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment>

@@ -1,86 +1,59 @@
-import AddIcon from "@material-ui/icons/Add";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
-    display: "flex",
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.main,
-    },
-  },
-  details: {
+    width: "100%",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
+    justifyContent: "space-between",
   },
-  content: {
-    flex: "1 0 auto",
-    height: 100,
+  media: {
+    width: "100%",
+    height: "20vh",
   },
-  title: {
-    width: 140,
-  },
-  cover: {
-    width: 151,
-    height: 170,
-  },
-  controls: {
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(15),
-  },
-  nominateButtton: {
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
-}));
+});
 
 const SearchResultCard = (props) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={classes.root}
-      onClick={() => {
-        console.log("Search card clicked");
-        props.onSearchEntryClicked(props.movie);
-      }}
-    >
-      <CardMedia
-        className={classes.cover}
-        image={props.movie.Poster}
-        title={props.movie.imdbID}
-      />
-      <div className={classes.details}>
-        <CardContent className={classes.content}>
-          <Typography className={classes.title} component="h5" variant="h5">
+    <Card className={classes.root}>
+
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          className={classes.media}
+          image={props.movie.Poster}
+        />
+        <CardContent>
+          <Typography variant="h6">
             {props.movie.Title}
-            {/* Live from space */}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          <Typography variant="body2" color="textSecondary" component="p">
             {props.movie.Year}
           </Typography>
         </CardContent>
-        <div className={classes.controls}>
-          <IconButton
-            className={classes.nominateButtton}
-            aria-label="nominate"
-            disabled={props.movie.disableNominate}
-            onClick={() => {
-              props.onNominateClicked(props.movie);
-            }}
-          >
-            <AddIcon />
-          </IconButton>
-        </div>
-      </div>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+        <Button size="small" color="primary">
+          Learn More
+        </Button>
+      </CardActions>
     </Card>
   );
-};
+}
+
 export default SearchResultCard;
