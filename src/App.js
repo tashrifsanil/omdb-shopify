@@ -4,8 +4,16 @@ import "fontsource-roboto";
 import "@fontsource/open-sans";
 
 import React, { useEffect, useState } from "react";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+
+import {
+  ThemeProvider,
+  createMuiTheme
+} from "@material-ui/core/styles";
+
+import {
+  makeStyles,
+  useTheme
+} from "@material-ui/core/styles";
 
 import AlertDialog from "./components/AlertDialog";
 // import DialogContentText from '@material-ui/core/DialogContentText';
@@ -17,6 +25,16 @@ import SearchAppBar from "./components/SearchAppBar";
 import SearchResults from "./components/SearchResults";
 import Typography from "@material-ui/core/Typography";
 import { Helmet } from 'react-helmet';
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
+
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SearchIcon from "@material-ui/icons/Search";
+import IconButton from "@material-ui/core/IconButton";
+import TextField from "@material-ui/core/TextField";
+
+import { Box } from "@material-ui/core";
+import SearchField from "./components/SearchField";
 
 const useStyles = makeStyles((theme) => ({
   nominationsHeader: {
@@ -88,6 +106,7 @@ function App() {
       saveToLocalStorage(newNominationsList);
       setNomCompleted(true);
     } else {
+
       setNomCompleted(true);
     }
   };
@@ -117,65 +136,19 @@ function App() {
   });
 
   return (
- 
+
     <ThemeProvider theme={theme}>
-         <Helmet>
-          <title>OMDb Movies</title>
-        </Helmet>
-      <Grid container direction="column">
-        <Grid item xs={12}>
-          <SearchAppBar setSearchTerm={setSearchTerm} />
-        </Grid>
-        <Grid item xs={12} container direction="row">
-          <Grid item container direction="column" xs={5}>
-            <Grid item>
-              {searchResultsVisible ? (
-                <SearchResults
-                  searchTerm={searchTerm}
-                  currentPage={currentPage}
-                  setMaxPages={setMaxPages}
-                  onNominateClicked={nominateMovie}
-                  onSearchEntryClicked={onSearchEntryClicked}
-                  nominatedMoviesList={nominatedMoviesList}
-                ></SearchResults>
-              ) : null}
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            direction="row"
-            xs={showMovieMoreInfo ? 3 : 6}
-            justify="center"
-          >
-            <Grid item xs={12}>
-              {nominatedMoviesList.length ? (
-                <Typography className={classes.nominationsHeader} variant="h4">
-                  Nominations
-                </Typography>
-              ) : null}
-              <NominatedMovies
-                movies={nominatedMoviesList}
-                onRemoveNominationClicked={removeNomination}
-              />
-            </Grid>
-          </Grid>
-          <Grid item xs={4}>
-            <MovieMoreInfo visible={showMovieMoreInfo} movie={movie4MoreInfo} />
+      <Helmet>
+        <title>OMDb Movies</title>
+      </Helmet>
+      <SearchAppBar setSearchTerm={setSearchTerm} />
+      <Box>
+        <Grid container direction="row" >
+          <Grid item xs={12}>
+            <SearchField />
           </Grid>
         </Grid>
-      </Grid>
-      <PageControl
-        maxPages={maxPages}
-        minPages={1}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      ></PageControl>
-      <AlertDialog
-        hideButton={nominationsVisible}
-        open={nominationsCompleted}
-        nominations={nominatedMoviesList}
-      />
+      </Box>
     </ThemeProvider>
   );
 }
