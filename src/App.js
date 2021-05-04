@@ -20,6 +20,7 @@ import AlertDialog from "./components/AlertDialog";
 import Grid from "@material-ui/core/Grid";
 import MovieMoreInfo from "./components/MovieMoreInfo";
 import NominatedMovies from "./components/NominatedMovies";
+import NominatedMovieCard from "./components/NominatedMovieCard";
 import PageControl from "./components/PageControl";
 import SearchAppBar from "./components/SearchAppBar";
 import SearchResults from "./components/SearchResults";
@@ -27,6 +28,7 @@ import Typography from "@material-ui/core/Typography";
 import { Helmet } from 'react-helmet';
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
+import Divider from "@material-ui/core/Divider";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
@@ -131,7 +133,7 @@ function App() {
 
   const theme = createMuiTheme({
     palette: {
-      type: "dark",
+      type: "light",
     },
   });
 
@@ -145,19 +147,40 @@ function App() {
       <Box>
         <Grid container direction="row" >
           <Grid item xs={12}>
-            <SearchField setSearchTerm={setSearchTerm}/>
+            <SearchField setSearchTerm={setSearchTerm} />
           </Grid>
-          <Grid item xs={1}/>
-          <Grid item xs={8}>
-            <SearchResults searchTerm={searchTerm}/>
+          <Grid item xs={1} />
+          <Grid item container xs={7}>
+            <SearchResults
+              searchTerm={searchTerm}
+              onNominateClicked={nominateMovie}
+              nominatedMoviesList={nominatedMoviesList} />
+
           </Grid>
-          <Grid item xs={2}/>
-          <Grid item xs={1}/>
+          <Grid item container direction="row" xs={3} spacing={2} style={{ height: '80vh' }} alignItems="stretch">
+            <NominatedMovies
+              movies={nominatedMoviesList}
+              onRemoveNominationClicked={removeNomination}
+            />
+            {/* <Grid item>
+              <NominatedMovieCard
+                movie={nominatedMoviesList[0]}
+                onRemoveNominationClicked={removeNomination}
+              />
+            </Grid>
+            <Grid item>
+              <NominatedMovieCard
+                movie={nominatedMoviesList[0]}
+                onRemoveNominationClicked={removeNomination}
+              />
+            </Grid> */}
+          </Grid>
+          <Grid item xs={1} />
 
 
         </Grid>
-      </Box>
-    </ThemeProvider>
+      </Box >
+    </ThemeProvider >
   );
 }
 

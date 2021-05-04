@@ -1,85 +1,112 @@
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import IconButton from "@material-ui/core/IconButton";
-import React from "react";
-import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    width: "97%",
+    height: '100%',
   },
   details: {
-    display: "flex",
-    flexDirection: "column",
+    display: 'flex',
+    flexDirection: 'column',
   },
   content: {
-    flex: "1 0 auto",
-    height: 100,
-  },
-  title: {
-    // width: 140,
+    // flex: 'auto',
+    height: "100%",
   },
   cover: {
-    width: 151,
-    height: 170,
-    // width: "100%",
-    // height: "100%",
+    width: "100%",
+    height: "100%",
+  },
+  title: {
+    fontSize: '1000',
+  },
+  year: {
+    fontSize: '.1rem',
   },
   controls: {
-    // justify: "flex-end",
-    display: "flex",
-    alignItems: "center",
-    paddingLeft: theme.spacing(2),
-    paddingBottom: theme.spacing(2),
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
-  removeNominationButton: {
-    justify: "flex-end",
-  },
-  removeNominationIcon: {
-    color: theme.palette.error.main,
+  playIcon: {
+    height: 38,
+    width: 38,
   },
 }));
 
 const NominatedMovieCard = (props) => {
   const classes = useStyles();
-  // eslint-disable-next-line no-unused-vars
   const theme = useTheme();
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.cover}
-        image={props.movie.Poster}
-        title={props.movie.imdbID}
-      />
-      <div className={classes.details}>
+      <Grid container className={classes.root}>
+        <Grid item container xs={10}>
+          <Grid item xs={12}>
+            <CardContent className={classes.content}>
+              <Typography variant="h6" className={classes.Title} noWrap={true}>
+                {props.movie.Title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary" className={classes.Year}>
+                {props.movie.Year}
+              </Typography>
+            </CardContent>
+          </Grid>
+          <Grid item xs={12}>
+            <div className={classes.controls}>
+              <Button size="small" color="primary"
+                onClick={() => {
+                  props.onRemoveNominationClicked(props.movie);
+                }}>
+                Remove
+          </Button>
+            </div>
+          </Grid>
+        </Grid>
+        <Grid item xs={2}>
+          <CardMedia
+            className={classes.cover}
+            image={props.movie.Poster}
+          />
+        </Grid>
+      </Grid>
+      {/* <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography className={classes.title} component="h5" variant="h5">
+          <Typography component="h5" variant="h5">
             {props.movie.Title}
-            {/* Live from space */}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
             {props.movie.Year}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
-          <IconButton
-            className={classes.removeNominationButton}
-            aria-label="nominate"
+          <Button size="small" color="primary"
             onClick={() => {
               props.onRemoveNominationClicked(props.movie);
-            }}
-          >
-            <RemoveCircleIcon className={classes.removeNominationIcon} />
-          </IconButton>
+            }}>
+            Remove
+          </Button>
         </div>
       </div>
-    </Card>
+      <CardMedia
+        className={classes.cover}
+        image={props.movie.Poster}
+        // title={props.movie.Title}
+      /> */}
+    </Card >
   );
-};
+}
+
 export default NominatedMovieCard;

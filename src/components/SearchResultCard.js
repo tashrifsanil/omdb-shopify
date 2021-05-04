@@ -9,19 +9,20 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     height: "100%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    marginRight: theme.spacing(2),
   },
   media: {
     width: "100%",
     height: "20vh",
   },
-});
+}));
 
 const SearchResultCard = (props) => {
   const classes = useStyles();
@@ -45,8 +46,11 @@ const SearchResultCard = (props) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
+        <Button size="small" color="primary"
+          onClick={() => {
+            props.onNominateClicked(props.movie);
+          }}>
+          Nominate
         </Button>
         <Button size="small" color="primary">
           Learn More
