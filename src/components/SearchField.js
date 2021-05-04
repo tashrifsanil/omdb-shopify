@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
     textField: {
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
+        [`& fieldset`]: {
+            borderRadius: "20vh",
+          },
     }
 }));
 
