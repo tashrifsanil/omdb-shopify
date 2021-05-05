@@ -11,11 +11,11 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    backgroundColor: "#181818",
+    backgroundColor: "#000000",
   },
   movieIcon: {
     fontSize: "250%",
-    color: "#ff316f",
+    color: theme.palette.primary.main,
   },
 }));
 

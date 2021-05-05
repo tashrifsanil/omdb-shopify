@@ -2,11 +2,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import "./App.css";
 import "fontsource-roboto";
 import "@fontsource/open-sans";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import React, { useEffect, useState } from "react";
 
 import {
   ThemeProvider,
+  MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
 
@@ -130,16 +132,36 @@ function App() {
   const classes = useStyles();
 
   // dark mode theming
-
-  const theme = createMuiTheme({
+  const lightTheme = createMuiTheme({});
+  const darkTheme = createMuiTheme({
     palette: {
-      type: "light",
+      primary: {
+        main: '#BB86FC',
+      },
+      background: {
+        default: '#121212',
+        paper: '#1e1e1e',
+      },
+      text: {
+        primary: '#e3e3e3',
+        secondary: '#a5a5a5',
+        disabled: '#BB86FC'
+      },
+      action: {
+        active: '#e3e3e3',
+        disabledBackground: '#BB86FC',
+      }
     },
+
+
   });
+
+  const theme = createMuiTheme({});
 
   return (
 
-    <ThemeProvider theme={theme}>
+    <MuiThemeProvider theme={darkTheme}>
+      <CssBaseline/>
       <Helmet>
         <title>OMDb Movies</title>
       </Helmet>
@@ -180,7 +202,7 @@ function App() {
 
         </Grid>
       </Box >
-    </ThemeProvider >
+    </MuiThemeProvider>
   );
 }
 
