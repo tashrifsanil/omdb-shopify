@@ -95,6 +95,8 @@ const SearchResults = (props) => {
 
   const sliceMap = (fn, from, toExclusive, array) => {
     const len = toExclusive - from;
+    console.log("Array len ", len);
+
     const mapped = Array(len);
 
     for (let i = 0; i < len; i++) {
@@ -121,7 +123,7 @@ const SearchResults = (props) => {
                   onNominateClicked={props.onNominateClicked}
                 />
               )
-            }, 0, movies.length / 2, movies)}
+            }, 0, parseInt(movies.length / 2), movies)}
 
           </Box>
         </Grid>
@@ -135,7 +137,7 @@ const SearchResults = (props) => {
                   onNominateClicked={props.onNominateClicked}
                 />
               )
-            }, movies.length / 2, movies.length, movies)}
+            }, parseInt(movies.length / 2), movies.length, movies)}
           </Box>
         </Grid>
       </Grid>
