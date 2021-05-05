@@ -115,7 +115,7 @@ const SearchResults = (props) => {
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Box className={classes.row}>
-            {sliceMap((movie, index) => {
+            {/* {sliceMap((movie, index) => {
               return (
                 <SearchResultCard
                   movie={movie}
@@ -123,13 +123,19 @@ const SearchResults = (props) => {
                   onNominateClicked={props.onNominateClicked}
                 />
               )
-            }, 0, parseInt(movies.length / 2), movies)}
+            }, 0, parseInt(movies.length / 2), movies)} */}
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+
 
           </Box>
         </Grid>
         <Grid item xs={12}>
           <Box className={classes.row}>
-            {sliceMap((movie, index) => {
+            {/* {sliceMap((movie, index) => {
               return (
                 <SearchResultCard
                   movie={movie}
@@ -137,7 +143,13 @@ const SearchResults = (props) => {
                   onNominateClicked={props.onNominateClicked}
                 />
               )
-            }, parseInt(movies.length / 2), movies.length, movies)}
+            }, parseInt(movies.length / 2), movies.length, movies)} */}
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+            <SearchResultCard />
+
           </Box>
         </Grid>
       </Grid>
