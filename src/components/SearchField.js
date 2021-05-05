@@ -20,17 +20,20 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(4),
         paddingBottom: theme.spacing(4),
         [`& fieldset`]: {
-            // borderRadius: "20vh",
+            borderRadius: "20vh",
         },
         "& .MuiFilledInput-root": {
-            background: "#2f2f2f"
+            // background: "#2f2f2f"
+            foreground: "red",
         },
         "& .MuiOutlinedInput-root": {
-            background: "#2f2f2f"
+            // background: "#2f2f2f"
+            foreground: "red",
+
         },
         search: {
-            backgroundColor: "#BB86FC",
-            backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
             // position: 'relative',
             // borderRadius: "25vh",
             // backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -45,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
             // },
         },
         searchIcon: {
-            backgroundColor: "#BB86FC",
-            backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
             // padding: theme.spacing(0, 2),
             // height: '100%',
             // position: 'absolute',
@@ -57,12 +60,12 @@ const useStyles = makeStyles((theme) => ({
         },
         inputRoot: {
             color: 'inherit',
-            backgroundColor: "#BB86FC",
-            backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
         },
         inputInput: {
-            backgroundColor: "#BB86FC",
-            backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
+            // backgroundColor: "#BB86FC",
             // padding: theme.spacing(1, 1, 1, 0),
             // // vertical padding + font size from searchIcon
             // paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,

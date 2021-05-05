@@ -22,28 +22,39 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: "100%",
     height: "20vh",
+    // width: 100,
+    // height: 200,
   },
+  skeletonTitle: {
+    width: "80%",
+    height: "3.5vh",
+  },
+  skeletonSubTitle: {
+    width: "5vw",
+    height: "3.5vh",
+  },
+  skeletonMedia: {
+    height: "20vh",
+    width: "100%",
+  }
 }));
 
 const SearchResultCard = (props) => {
   const classes = useStyles();
-  const [resultsLoaded, setResultsLoaded] = useState(false);
-  
-  
-  useEffect(() => {
-    if (Object.keys(props.movie).length > 0) {
-      setResultsLoaded(true);
-    }
-  }, [props.movie])
 
-  
+  useEffect(() => {
+    console.log("Search result card loading -> ", props.loading);
+    console.log("Search result movie -> ", props.movie);
+  }, [props.loading, props.movie])
+
+
 
   return (
     <Card className={classes.root}>
 
       <CardActionArea>
-        {!resultsLoaded ? (
-          <Skeleton animation="wave" variant="rect" className={classes.media} />
+        {props.loading ? (
+          <Skeleton animation="wave" variant="rect" className={classes.skeletonMedia} />
         ) : (
           <CardMedia
             component="img"
@@ -52,27 +63,27 @@ const SearchResultCard = (props) => {
           />
         )}
         <CardContent>
-          {!resultsLoaded ? (
+          {props.loading ? (
             <>
-              <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-              <Skeleton animation="wave" height={10} width="80%" />
+              <Skeleton animation="wave" className={classes.skeletonTitle} />
+              <Skeleton animation="wave" className={classes.skeletonSubTitle} />
             </>
           ) : (
             <>
               <Typography variant="h6">
-                 {props.movie.Title}
-          </Typography>
+                {props.movie.Title}
+              </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
                 {props.movie.Year}
-          </Typography>
+              </Typography>
             </>
           )}
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {!resultsLoaded ? (<>
-          <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-          <Skeleton animation="wave" height={10} width="80%" />
+        {props.loading ? (<>
+          <Skeleton animation="wave" height={"5vh"} width="100%" />
+          <Skeleton animation="wave" height={"5vh"} width="100%" />
         </>
         ) : (
           <>

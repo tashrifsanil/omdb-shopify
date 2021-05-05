@@ -170,6 +170,7 @@ function App() {
         <Grid container direction="row" >
           <Grid item xs={12}>
             <SearchField setSearchTerm={setSearchTerm} />
+
           </Grid>
           <Grid item xs={1} />
           <Grid item container xs={7}>
