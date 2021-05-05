@@ -27,7 +27,14 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResultCard = (props) => {
   const classes = useStyles();
-  const resultsLoaded = useState(false);
+  const [resultsLoaded, setResultsLoaded] = useState(false);
+  
+  
+  useEffect(() => {
+    if (Object.keys(props.movie).length > 0) {
+      setResultsLoaded(true);
+    }
+  }, [props.movie])
 
   
 
@@ -35,18 +42,17 @@ const SearchResultCard = (props) => {
     <Card className={classes.root}>
 
       <CardActionArea>
-        {resultsLoaded ? (
+        {!resultsLoaded ? (
           <Skeleton animation="wave" variant="rect" className={classes.media} />
         ) : (
           <CardMedia
             component="img"
             className={classes.media}
-            // image={props.movie.Poster}
-            image="test.img"
+            image={props.movie.Poster}
           />
         )}
         <CardContent>
-          {resultsLoaded ? (
+          {!resultsLoaded ? (
             <>
               <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
               <Skeleton animation="wave" height={10} width="80%" />
@@ -54,19 +60,17 @@ const SearchResultCard = (props) => {
           ) : (
             <>
               <Typography variant="h6">
-                /* {props.movie.Title} */
-            test
+                 {props.movie.Title}
           </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                {/* {props.movie.Year} */}
-            test
+                {props.movie.Year}
           </Typography>
             </>
           )}
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {resultsLoaded ? (<>
+        {!resultsLoaded ? (<>
           <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
           <Skeleton animation="wave" height={10} width="80%" />
         </>
