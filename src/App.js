@@ -150,7 +150,8 @@ function App() {
       action: {
         active: '#e3e3e3',
         disabledBackground: '#BB86FC',
-      }
+      },
+      searchfield: '#2f2f2f',
     },
 
 
