@@ -32,7 +32,6 @@ const SearchAppBar = (props) => {
             <MovieCreationOutlinedIcon className={classes.movieIcon} />
           </Grid>
           <Grid item xs={6}>
-            <Typography variant="h5" color="primary">The Shoppies</Typography>
           </Grid>
           <Grid item xs={3}>
           </Grid>

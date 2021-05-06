@@ -151,6 +151,7 @@ function App() {
         active: '#e3e3e3',
         disabledBackground: '#BB86FC',
       },
+      divider: "#BB86FC",
       searchfield: '#2f2f2f',
     },
 
@@ -161,14 +162,14 @@ function App() {
 
   return (
 
-    <MuiThemeProvider theme={darkTheme}>
+    <MuiThemeProvider theme={lightTheme}>
       <CssBaseline/>
       <Helmet>
         <title>OMDb Movies</title>
       </Helmet>
-      <SearchAppBar setSearchTerm={setSearchTerm} />
+      {/* <SearchAppBar setSearchTerm={setSearchTerm} /> */}
       <Box>
-        <Grid container direction="row" >
+        <Grid container direction="row">
           <Grid item xs={12}>
             <SearchField setSearchTerm={setSearchTerm} />
 
