@@ -1,6 +1,6 @@
 import Box from "@material-ui/core/Box";
 import NominatedMovieCard from "./NominatedMovieCard";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
@@ -26,11 +26,36 @@ const useStyles = makeStyles((theme) => ({
 
 const NominatedMovies = (props) => {
   const classes = useStyles();
+  const maxNominations = 5;
+
+  const movieDataFormat = {
+    Poster: "",
+    Title: "",
+    Type: "",
+    Year: "",
+    disableNominate: false,
+    imdbID: "",
+  }
+
+  useEffect(() => {
+  }, [props.movies])
+
 
   return (
     <>
       <>
         {props.movies.map((movie, index) => {
+          return (
+            <Grid item xs={12}>
+              <NominatedMovieCard
+                movie={movie}
+                onRemoveNominationClicked={props.onRemoveNominationClicked}
+              />
+            </Grid>
+          );
+        })}
+        {
+        Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
           return (
             <Grid item xs={12}>
               <NominatedMovieCard
