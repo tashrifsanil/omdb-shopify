@@ -32,6 +32,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const sliceMap = (fn, from, toExclusive, array) => {
+  const len = toExclusive - from;
+  console.log("Array len ", len);
+
+  const mapped = Array(len);
+
+  for (let i = 0; i < len; i++) {
+    mapped[i] = fn(array[i + from], i);
+  }
+
+  return mapped;
+};
+
 const SearchResults = (props) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -52,13 +65,24 @@ const SearchResults = (props) => {
   const initialMovieData = new Array(10).fill(movieDataFormat);
 
   const [movies, setMovies] = useState(initialMovieData);
+  const [disableNominations, setDisableNominations] = useState(false);
 
   // This gets run everytime the state of searchTerm changes
   useEffect(() => {
     console.log("Search term was changed, ", props.searchTerm);
     searchMovieRequest();
 
-  }, [props.searchTerm, activeStep, props.nominatedMoviesList]);
+  }, [props.searchTerm, activeStep]);
+
+  // Prevent further nominations after 5 nominations have already been made
+  useEffect(() => {
+    if (props.nominatedMoviesList.length >= 5) {
+      setDisableNominations(true);
+    } else {
+      setDisableNominations(false);
+
+    }
+  }, [props.nominatedMoviesList])
 
 
   console.log("Data test ", data);
@@ -78,6 +102,35 @@ const SearchResults = (props) => {
     try {
       const response = await axios(url);
       setData(response.data);
+
+
+      // Additionally if we get a list of alreadyNominated movies
+      // we need to disable the movies in that list so they can't be nominated again
+      if (props.nominatedMoviesList) {
+        for (var i = 0; i < response.data.Search.length; i++) {
+          response.data.Search[i].disableNominate = false;
+          for (var j = 0; j < props.nominatedMoviesList.length; j++) {
+            console.log(
+              "Search id ",
+              response.data.Search[i].imdbID,
+              " storageid ",
+              props.nominatedMoviesList[j].imdbID
+            );
+            if (
+              response.data.Search[i].imdbID ===
+              props.nominatedMoviesList[j].imdbID
+            ) {
+              console.log("Disabled comparison succeeded ");
+              response.data.Search[i].disableNominate = true;
+            }
+          }
+        }
+      } else {
+        for (var iter = 0; iter < response.data.Search.length; iter++) {
+          response.data.Search[iter].disableNominate = false;
+        }
+      }
+
       setMovies(response.data.Search);
 
       var maxPagesCalc = Math.ceil(response.data.totalResults / 10);
@@ -92,19 +145,6 @@ const SearchResults = (props) => {
 
     console.log("Search data -> ", data);
   }
-
-  const sliceMap = (fn, from, toExclusive, array) => {
-    const len = toExclusive - from;
-    console.log("Array len ", len);
-
-    const mapped = Array(len);
-
-    for (let i = 0; i < len; i++) {
-      mapped[i] = fn(array[i + from], i);
-    }
-
-    return mapped;
-  };
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -126,6 +166,7 @@ const SearchResults = (props) => {
                     <SearchResultCard
                       movie={movie}
                       loading={loading}
+                      disableNominations={disableNominations}
                       onSearchEntryClicked={props.onSearchEntryClicked}
                       onNominateClicked={props.onNominateClicked}
                     />
@@ -142,6 +183,7 @@ const SearchResults = (props) => {
                     <SearchResultCard
                       movie={movie}
                       loading={loading}
+                      disableNominations={disableNominations}
                       onSearchEntryClicked={props.onSearchEntryClicked}
                       onNominateClicked={props.onNominateClicked}
                     />

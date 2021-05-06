@@ -87,7 +87,10 @@ const SearchResultCard = (props) => {
         </>
         ) : (
           <>
-            <Button size="small" color="primary"
+            <Button 
+            size="small" 
+            color="primary"
+            disabled={props.movie.disableNominate || props.disableNominations}
               onClick={() => {
                 props.onNominateClicked(props.movie);
               }}>
