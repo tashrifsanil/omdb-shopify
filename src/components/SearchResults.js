@@ -15,6 +15,7 @@ import {
 } from '@material-ui/icons';
 
 import SearchResultCard from "./SearchResultCard";
+import SearchResultSkeletonCard from "./SearchResultSkeletonCard";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import axios from 'axios';
@@ -50,6 +51,8 @@ const SearchResults = (props) => {
   const theme = useTheme();
 
   const [data, setData] = useState([]);
+
+  const [show, setShow] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -137,6 +140,7 @@ const SearchResults = (props) => {
       setMaxSteps(maxPagesCalc);
 
       setLoading(false);
+      setShow(true);
 
     } catch (err) {
       setError(err);
@@ -156,20 +160,26 @@ const SearchResults = (props) => {
 
   return (
     <>
-      {movies ? (
+      {show ? (
         <Box component="flex" style={{ height: '80vh' }} spacing={2}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Box className={classes.row}>
                 {sliceMap((movie, index) => {
                   return (
-                    <SearchResultCard
-                      movie={movie}
-                      loading={loading}
-                      disableNominations={disableNominations}
-                      onSearchEntryClicked={props.onSearchEntryClicked}
-                      onNominateClicked={props.onNominateClicked}
-                    />
+                    <>
+                      {loading ? (
+                        <SearchResultSkeletonCard />
+                      ) : (
+                        <SearchResultCard
+                          movie={movie}
+                          loading={loading}
+                          disableNominations={disableNominations}
+                          onSearchEntryClicked={props.onSearchEntryClicked}
+                          onNominateClicked={props.onNominateClicked}
+                        />
+                      )}
+                    </>
                   )
                 }, 0, parseInt(movies.length / 2), movies)}
 
@@ -180,13 +190,19 @@ const SearchResults = (props) => {
               <Box className={classes.row}>
                 {sliceMap((movie, index) => {
                   return (
-                    <SearchResultCard
-                      movie={movie}
-                      loading={loading}
-                      disableNominations={disableNominations}
-                      onSearchEntryClicked={props.onSearchEntryClicked}
-                      onNominateClicked={props.onNominateClicked}
-                    />
+                    <>
+                      {loading ? (
+                        <SearchResultSkeletonCard />
+                      ) : (
+                        <SearchResultCard
+                          movie={movie}
+                          loading={loading}
+                          disableNominations={disableNominations}
+                          onSearchEntryClicked={props.onSearchEntryClicked}
+                          onNominateClicked={props.onNominateClicked}
+                        />
+                      )}
+                    </>
                   )
                 }, parseInt(movies.length / 2), movies.length, movies)}
 
