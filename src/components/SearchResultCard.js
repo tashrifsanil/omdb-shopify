@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginRight: theme.spacing(2),
   },
-  media: {
+  cover: {
     width: "100%",
     height: "20vh",
-    // width: 100,
-    // height: 200,
+  },
+  content: {
+    // height: "100%",
   },
   skeletonTitle: {
     width: "80%",
@@ -36,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
   skeletonMedia: {
     height: "20vh",
     width: "100%",
+  },
+  skeletonContent: {
+    width: "5vw",
+    paddingBottom: "32%",
   }
 }));
 
@@ -50,24 +55,24 @@ const SearchResultCard = (props) => {
 
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} fullWidth={true}>
 
       <CardActionArea>
         {props.loading ? (
-          <Skeleton animation="wave" variant="rect" className={classes.skeletonMedia} />
+          <Skeleton animation="wave" variant="rect" height="20vh" width="100%" />
         ) : (
           <CardMedia
             component="img"
-            className={classes.media}
+            className={classes.cover}
             image={props.movie.Poster}
           />
         )}
-        <CardContent>
+        <CardContent className={classes.content}>
           {props.loading ? (
-            <>
-              <Skeleton animation="wave" className={classes.skeletonTitle} />
-              <Skeleton animation="wave" className={classes.skeletonSubTitle} />
-            </>
+            <div className={classes.skeletonContent}>
+              <Skeleton animation="wave" height="100%"  width="100%"/>
+              <Skeleton animation="wave" height="100%" width="80%" />
+            </div>
           ) : (
             <>
               <Typography variant="h6">
@@ -82,8 +87,8 @@ const SearchResultCard = (props) => {
       </CardActionArea>
       <CardActions>
         {props.loading ? (<>
-          <Skeleton animation="wave" height={"5vh"} width="100%" />
-          <Skeleton animation="wave" height={"5vh"} width="100%" />
+          <Skeleton animation="wave" height="100%" width="100%" />
+          <Skeleton animation="wave" height="100%" width="100%" />
         </>
         ) : (
           <>

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   content: {
-    // flex: 'auto',
+    flex: 'auto',
     height: "100%",
   },
   cover: {
