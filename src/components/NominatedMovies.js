@@ -60,6 +60,7 @@ const NominatedMovies = (props) => {
             <Grid item xs={12}>
               <NominatedMovieCard
                 movie={movie}
+                showSkeleton={true}
                 onRemoveNominationClicked={props.onRemoveNominationClicked}
               />
             </Grid>
