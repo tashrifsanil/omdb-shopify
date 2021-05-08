@@ -1,8 +1,13 @@
-import Box from "@material-ui/core/Box";
 import NominatedMovieCard from "./NominatedMovieCard";
 import React, { useEffect, useState } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+
+import {
+  Grid,
+  Typography,
+  Button,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   resultEntry: {
@@ -28,6 +33,7 @@ const NominatedMovies = (props) => {
   const classes = useStyles();
   const maxNominations = 5;
 
+
   const movieDataFormat = {
     Poster: "",
     Title: "",
@@ -38,12 +44,27 @@ const NominatedMovies = (props) => {
   }
 
   useEffect(() => {
+
   }, [props.movies])
 
 
   return (
     <>
       <>
+        <Grid item container xs={12}
+          alignItems="center"
+          justify="space-around">
+          <Grid item>
+            <Typography variant="h6">
+              Nominations
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Typography variant="h6">
+              {props.movies.length}/{maxNominations}
+            </Typography>
+          </Grid>
+        </Grid>
         {props.movies.map((movie, index) => {
           return (
             <Grid item xs={12}>
@@ -55,17 +76,17 @@ const NominatedMovies = (props) => {
           );
         })}
         {
-        Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
-          return (
-            <Grid item xs={12}>
-              <NominatedMovieCard
-                movie={movie}
-                showSkeleton={true}
-                onRemoveNominationClicked={props.onRemoveNominationClicked}
-              />
-            </Grid>
-          );
-        })}
+          Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
+            return (
+              <Grid item xs={12}>
+                <NominatedMovieCard
+                  movie={movie}
+                  showSkeleton={true}
+                  onRemoveNominationClicked={props.onRemoveNominationClicked}
+                />
+              </Grid>
+            );
+          })}
       </>
     </>
   );

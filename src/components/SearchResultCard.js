@@ -101,7 +101,9 @@ const SearchResultCard = (props) => {
               }}>
               Nominate
         </Button>
-            <Button size="small" color="primary">
+            <Button 
+            size="small" 
+            color="primary">
               Learn More
         </Button>
           </>

@@ -1,7 +1,5 @@
-import "bootstrap/dist/css/bootstrap.min.css";
 // import "./App.css";
 import "fontsource-roboto";
-import "@fontsource/open-sans";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import React, { useEffect, useState } from "react";
@@ -57,8 +55,12 @@ function App() {
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
   const [maxPages, setMaxPages] = useState(1);
 
-  const [nominationsCompleted, setNomCompleted] = useState(false);
+  const [nominationsCompleted, setNominationsCompleted] = useState(false);
+  const [openNominationsDialog, setOpenNominationsDialog] = useState(false);
+
   const maxNominations = 5;
+
+  const [landing, setLanding] = useState(true);
 
   const [showMovieMoreInfo, setShowMovieMoreInfo] = useState(false);
 
@@ -75,6 +77,7 @@ function App() {
     const nominatedMovies = JSON.parse(
       localStorage.getItem("omdb-app-nominations")
     );
+
     console.log("Nominated movies local storage ", nominatedMovies);
     // If we have nothing in local storage our array can be none
     // so to avoid that we check if its before setting the state of nominated nominated movies
@@ -86,13 +89,16 @@ function App() {
 
   useEffect(() => {
     // Search term has changed, if it's more than 3 characters show search results
-    if (searchTerm.length >= 3) {
+
+    if (searchTerm.length > 0) {
+      setLanding(false);
       setSearchResultsVisibility(true);
     } else if (searchTerm.length === 0) {
       setSearchResultsVisibility(false);
       setShowMovieMoreInfo(false);
     }
     if (nominatedMoviesList.length > 0) {
+      setLanding(false);
       setNominationsVisibility(true);
     }
   }, [searchTerm, nominatedMoviesList]);
@@ -108,10 +114,10 @@ function App() {
       const newNominationsList = [...nominatedMoviesList, movie];
       setNominatedMoviesList(newNominationsList);
       saveToLocalStorage(newNominationsList);
-      setNomCompleted(true);
+      setNominationsCompleted(true);
     } else {
 
-      setNomCompleted(true);
+      setNominationsCompleted(true);
     }
   };
 
@@ -120,7 +126,7 @@ function App() {
     const newNominationsList = nominatedMoviesList.filter(
       (nominatedMoviesList) => nominatedMoviesList.imdbID !== movie.imdbID
     );
-    setNomCompleted(false);
+    setNominationsCompleted(false);
     setNominatedMoviesList(newNominationsList);
     saveToLocalStorage(newNominationsList);
   };
@@ -163,7 +169,7 @@ function App() {
   return (
 
     <MuiThemeProvider theme={lightTheme}>
-      <CssBaseline/>
+      <CssBaseline />
       <Helmet>
         <title>OMDb Movies</title>
       </Helmet>
@@ -171,40 +177,40 @@ function App() {
       <Box>
         <Grid container direction="row">
           <Grid item xs={12}>
-            <SearchField setSearchTerm={setSearchTerm} />
-
-          </Grid>
-          <Grid item xs={1} />
-          <Grid item container xs={7}>
-            <SearchResults
-              searchTerm={searchTerm}
-              onNominateClicked={nominateMovie}
-              nominatedMoviesList={nominatedMoviesList} />
-
-          </Grid>
-          <Grid item container direction="row" xs={3} spacing={2} style={{ height: '80vh' }} alignItems="stretch">
-            <NominatedMovies
-              movies={nominatedMoviesList}
-              onRemoveNominationClicked={removeNomination}
+            <SearchField
+              landing={landing}
+              setSearchTerm={setSearchTerm}
             />
-            {/* <Grid item>
-              <NominatedMovieCard
-                movie={nominatedMoviesList[0]}
-                onRemoveNominationClicked={removeNomination}
-              />
-            </Grid>
-            <Grid item>
-              <NominatedMovieCard
-                movie={nominatedMoviesList[0]}
-                onRemoveNominationClicked={removeNomination}
-              />
-            </Grid> */}
+
           </Grid>
           <Grid item xs={1} />
+          {landing ? (null) : (
+            <>
+              <Grid item container xs={7}>
+                <SearchResults
+                  searchTerm={searchTerm}
+                  onNominateClicked={nominateMovie}
+                  nominatedMoviesList={nominatedMoviesList} />
 
+              </Grid>
+              <Grid item container direction="row" xs={3} spacing={2} style={{ height: '80vh' }} alignItems="stretch">
+                <NominatedMovies
+                  movies={nominatedMoviesList}
+                  setNominationsCompleted={setOpenNominationsDialog}
+                  onRemoveNominationClicked={removeNomination}
+                />
+              </Grid>
+              <Grid item xs={1} />
+            </>
+          )}
 
         </Grid>
       </Box >
+      <AlertDialog
+        hideButton={nominationsVisible}
+        open={nominationsCompleted}
+        nominations={nominatedMoviesList}
+      />
     </MuiThemeProvider>
   );
 }

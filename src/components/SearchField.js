@@ -24,6 +24,10 @@ import ShopifyIcon from '../resources/icons/shopify.svg'
 const SearchField = (props) => {
     const [landing, setLanding] = useState(true);
 
+    useEffect(() => {
+        handleLanding();
+    }, [props.landing])
+
     const [fieldStyle, setFieldStyle] = useState({
         "& .MuiOutlinedInput-root": {
             borderRadius: "20vh",
@@ -36,9 +40,8 @@ const SearchField = (props) => {
         alignItems: 'center',
     })
 
-    const handleChange = (event) => {
-        if (landing == true) {
-            setLanding(false);
+    const handleLanding = () => {
+        if (props.landing == false) {
             setRootStyle({
                 paddingTop: "0vh",
                 paddingBottom: "16px",
@@ -48,6 +51,17 @@ const SearchField = (props) => {
                 paddingTop: "16px",
             })
         }
+        else {
+            setRootStyle({
+                paddingTop: "25vh",
+                paddingBottom: "16px",
+                alignItems: 'center',
+            })
+        }
+        setLanding(props.landing);
+    }
+
+    const handleChange = (event) => {
         props.setSearchTerm(event.target.value);
     }
 
@@ -84,7 +98,7 @@ const SearchField = (props) => {
 
     return (
         <Grid container style={rootStyle}>
-            { landing ? (
+            {landing ? (
                 <Grid item container xs={12} justify="flex-start" alignItems="center" className={classes.banner}>
                     <Grid item xs={3} />
                     <Grid item>
@@ -101,7 +115,7 @@ const SearchField = (props) => {
                 </Grid>
             ) : null}
             <Grid item container xs={12}>
-                <Grid item xs={landing ? 3 : 1}/>
+                <Grid item xs={landing ? 3 : 1} />
 
                 <Grid item xs={landing ? 6 : 10}>
                     <TextField
@@ -124,7 +138,7 @@ const SearchField = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid item xs={landing ? 3 : 1}/>
+                <Grid item xs={landing ? 3 : 1} />
             </Grid>
 
         </Grid >
