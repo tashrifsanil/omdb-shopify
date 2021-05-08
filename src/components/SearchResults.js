@@ -7,6 +7,7 @@ import {
   Divider,
   MobileStepper,
   Button,
+  Typography,
 } from "@material-ui/core";
 
 import {
@@ -16,6 +17,9 @@ import {
 
 import SearchResultCard from "./SearchResultCard";
 import SearchResultSkeletonCard from "./SearchResultSkeletonCard";
+
+import PageStepper from "./navigation/PageStepper";
+
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 import axios from 'axios';
@@ -57,7 +61,7 @@ const SearchResults = (props) => {
   const [error, setError] = useState('');
 
   const [maxSteps, setMaxSteps] = useState(1);
-  const [activeStep, setActiveStep] = useState(1);
+  const [activePage, setActivePage] = useState(1);
 
   var movieDataFormat = {
     Title: "",
@@ -73,9 +77,14 @@ const SearchResults = (props) => {
   // This gets run everytime the state of searchTerm changes
   useEffect(() => {
     console.log("Search term was changed, ", props.searchTerm);
+    setActivePage(1);
     searchMovieRequest();
 
-  }, [props.searchTerm, activeStep]);
+  }, [props.searchTerm]);
+
+  useEffect(() => {
+    searchMovieRequest();
+  }, [activePage])
 
   // Prevent further nominations after 5 nominations have already been made
   useEffect(() => {
@@ -98,7 +107,7 @@ const SearchResults = (props) => {
       props.searchTerm +
       "&apikey=a7d62505" +
       "&page=" +
-      activeStep;
+      activePage;
 
     setLoading(true);
 
@@ -150,12 +159,14 @@ const SearchResults = (props) => {
     console.log("Search data -> ", data);
   }
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+
+  const handlePageNext = () => {
+    setActivePage((currentPage) => currentPage + 1);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  const handlePageBack = () => {
+    setActivePage((currentPage) => currentPage - 1);
   };
 
   return (
@@ -210,23 +221,11 @@ const SearchResults = (props) => {
             </Grid>
 
           </Grid>
-          <MobileStepper
+          <PageStepper
             steps={maxSteps}
-            position="static"
-            variant="text"
-            activeStep={activeStep}
-            nextButton={
-              <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-                Next
-                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-              </Button>
-            }
-            backButton={
-              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-                Back
-              </Button>
-            }
+            activePage={activePage}
+            onBack={handlePageBack}
+            onNext={handlePageNext}
           />
         </Box>
 
