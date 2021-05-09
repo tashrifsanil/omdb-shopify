@@ -7,15 +7,10 @@ import {
   createMuiTheme
 } from "@material-ui/core/styles";
 
-import {
-  makeStyles,
-} from "@material-ui/core/styles";
-
-
 import { Helmet } from 'react-helmet';
 import { Box, Grid } from "@material-ui/core";
 
-import SearchField from "./components/search/SearchField";
+import LandingSearch from "./components/search/LandingSearch";
 import SearchAppBar from "./components/search/SearchAppBar";
 import SearchResults from "./components/search/SearchResults";
 
@@ -23,16 +18,9 @@ import NominatedMovies from "./components/nominations/NominatedMovies";
 import AlertDialog from "./components/AlertDialog";
 
 
-const useStyles = makeStyles((theme) => ({
-  nominationsHeader: {
-    paddingLeft: "1%",
-    fontFamily: "Open Sans Light",
-    width: "100%",
-  },
-}));
-
 function App() {
   const [landing, setLanding] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -89,7 +77,8 @@ function App() {
   const handleHomeClick = () => {
     setSearchTerm("");
     setNominatedMoviesList([]);
-    setLanding(true); 
+    setNominationsCompleted(false);
+    setLanding(true);
   }
 
   const removeNomination = (movie) => {
@@ -106,7 +95,6 @@ function App() {
     localStorage.setItem("omdb-app-nominations", JSON.stringify(items));
   };
 
-  const classes = useStyles();
 
   // dark mode theming
   const lightTheme = createMuiTheme({});
@@ -135,20 +123,24 @@ function App() {
 
   });
 
-  const theme = createMuiTheme({});
 
   return (
 
-    <MuiThemeProvider theme={lightTheme}>
+    <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <Helmet>
-        <title>OMDb Movies</title>
+        <title>The Shoppies</title>
       </Helmet>
-      {/* <SearchAppBar setSearchTerm={setSearchTerm} /> */}
+      <SearchAppBar
+        landing={landing}
+        onHomeClick={handleHomeClick}
+        onDarkModeToggle={setDarkMode}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm} />
       <Box>
         <Grid container direction="row" alignItems="stretch">
           <Grid item xs={12}>
-            <SearchField
+            <LandingSearch
               landing={landing}
               onHomeClick={handleHomeClick}
               setSearchTerm={setSearchTerm}

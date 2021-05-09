@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fade, makeStyles, useTheme } from '@material-ui/core/styles';
 
 import {
@@ -79,17 +79,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+const SearchAppBar = (props) => {
   const theme = useTheme();
   const classes = useStyles();
   const [darkMode, setDarkMode] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
-  console.log("Test primary ", theme.palette.primary);
+  const inputRef = React.createRef();
+
+  useEffect(() => {
+    if (!props.landing) {
+      inputRef.current.focus();
+    }
+  }, [props.landing]); // Only run the function if disabled changes
 
   const handleDarkModeToggle = () => {
-    setDarkMode((currentTheme) => !currentTheme);
+    setDarkMode((currentTheme) => {
+      props.onDarkModeToggle(!currentTheme);
+      return (!currentTheme);
+    });
   };
 
+  const handleChange = (event) => {
+    setSearchText(event.target.value);
+    props.setSearchTerm(event.target.value);
+  }
+
+  const handleHomeClick = (event) => {
+    setSearchText("");
+    props.onHomeClick()
+  }
 
 
   return (
@@ -101,6 +120,7 @@ export default function PrimarySearchAppBar() {
             className={classes.homeButton}
             color="inherit"
             aria-label="Go to homepage"
+            onClick={handleHomeClick}
           >
             <img src={ShopifySmallIcon} />
           </IconButton>
@@ -108,17 +128,25 @@ export default function PrimarySearchAppBar() {
             the shoppies
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search to nominate your top 5 favorite movies & series..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            {props.landing ? <div className={classes.grow} /> : (
+              <>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+
+                <InputBase
+                  placeholder="Search to nominate your top 5 favorite movies & series..."
+                  onChange={handleChange}
+                  inputRef={inputRef}
+                  value={props.searchTerm}
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </>
+            )}
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
@@ -127,7 +155,7 @@ export default function PrimarySearchAppBar() {
               {darkMode ? (
                 <LightModeIcon fill={theme.palette.primary.light} />
               ) : (
-                <DarkModeIcon fill={theme.palette.primary.dark}/>
+                <DarkModeIcon fill={theme.palette.primary.dark} />
               )}
             </IconButton>
           </div>
@@ -136,3 +164,5 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+
+export default SearchAppBar;

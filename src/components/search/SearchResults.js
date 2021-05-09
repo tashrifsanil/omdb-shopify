@@ -10,7 +10,7 @@ import SearchResultSkeletonCard from "./SearchResultSkeletonCard";
 
 import PageStepper from "../navigation/PageStepper";
 
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import axios from 'axios';
 
@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
     alignItems: 'stretch',
-    height: '100%',
     marginBottom: theme.spacing(2),
   },
 }));
@@ -43,7 +42,6 @@ const sliceMap = (fn, from, toExclusive, array) => {
 
 const SearchResults = (props) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   const [data, setData] = useState([]);
 
@@ -64,33 +62,6 @@ const SearchResults = (props) => {
 
   const [movies, setMovies] = useState(initialMovieData);
   const [disableNominations, setDisableNominations] = useState(false);
-
-  // This gets run everytime the state of searchTerm changes
-  useEffect(() => {
-    console.log("Search term was changed, ", props.searchTerm);
-    setActivePage(1);
-    if (props.searchTerm.length > 0)
-    searchMovieRequest();
-
-  }, [props.searchTerm]);
-
-  useEffect(() => {
-    searchMovieRequest();
-  }, [activePage])
-
-  // Prevent further nominations after 5 nominations have already been made
-  useEffect(() => {
-    if (props.nominatedMoviesList.length >= 5) {
-      setDisableNominations(true);
-    } else {
-      setDisableNominations(false);
-
-    }
-  }, [props.nominatedMoviesList])
-
-
-  console.log("Data test ", data);
-  console.log("Loading stats ", loading);
 
 
   const searchMovieRequest = async () => {
@@ -151,6 +122,28 @@ const SearchResults = (props) => {
     console.log("Search data -> ", data);
   }
 
+  // This gets run everytime the state of searchTerm changes
+  useEffect(() => {
+    console.log("Search term was changed, ", props.searchTerm);
+    setActivePage(1);
+    if (props.searchTerm.length > 0)
+      searchMovieRequest();
+
+  }, [props.searchTerm]);
+
+  useEffect(() => {
+    searchMovieRequest();
+  }, [activePage]);
+
+  // Prevent further nominations after 5 nominations have already been made
+  useEffect(() => {
+    if (props.nominatedMoviesList.length >= 5) {
+      setDisableNominations(true);
+    } else {
+      setDisableNominations(false);
+
+    }
+  }, [props.nominatedMoviesList])
 
 
   const handlePageNext = () => {
