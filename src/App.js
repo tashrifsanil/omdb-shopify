@@ -16,6 +16,7 @@ import { Helmet } from 'react-helmet';
 import { Box, Grid } from "@material-ui/core";
 
 import SearchField from "./components/search/SearchField";
+import SearchAppBar from "./components/search/SearchAppBar";
 import SearchResults from "./components/search/SearchResults";
 
 import NominatedMovies from "./components/nominations/NominatedMovies";
