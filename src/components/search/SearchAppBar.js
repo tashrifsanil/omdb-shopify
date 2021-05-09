@@ -95,6 +95,7 @@ const SearchAppBar = (props) => {
 
   const handleDarkModeToggle = () => {
     setDarkMode((currentTheme) => {
+    localStorage.setItem("omdb-app-dark-mode", !currentTheme);
       props.onDarkModeToggle(!currentTheme);
       return (!currentTheme);
     });
@@ -153,8 +154,10 @@ const SearchAppBar = (props) => {
             <IconButton aria-label="Toggle Dark Mode" color="inherit"
               onClick={() => { handleDarkModeToggle(); }}>
               {darkMode ? (
+                // <LightModeIcon fill={theme.palette.primary.light} />
                 <LightModeIcon fill={theme.palette.primary.light} />
               ) : (
+                // <DarkModeIcon fill={theme.palette.primary.dark} />
                 <DarkModeIcon fill={theme.palette.primary.dark} />
               )}
             </IconButton>

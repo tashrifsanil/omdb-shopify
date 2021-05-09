@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core/styles";
 
 import { Helmet } from 'react-helmet';
-import { Box, Grid } from "@material-ui/core";
+import { Box, Grid, Card } from "@material-ui/core";
 
 import LandingSearch from "./components/search/LandingSearch";
 import SearchAppBar from "./components/search/SearchAppBar";
@@ -30,6 +30,11 @@ function App() {
 
 
   useEffect(() => {
+    // Check if theme variant is already set to dark mode from local storage
+    const isAlreadyDarkMode = JSON.parse(
+      localStorage.getItem("omdb-app-dark-mode")
+    );
+
     const nominatedMovies = JSON.parse(
       localStorage.getItem("omdb-app-nominations")
     );
@@ -38,15 +43,17 @@ function App() {
     // If we have nothing in local storage our array can be none
     // so to avoid that we check if its before setting the state of nominated nominated movies
     // from local storage
-    if (nominatedMovies) {
+    if (nominatedMovies)
       setNominatedMoviesList(nominatedMovies);
-    }
+
+    if (isAlreadyDarkMode)
+      setDarkMode(isAlreadyDarkMode);
   }, []);
 
   useEffect(() => {
     if (searchTerm.length > 0) {
       setLanding(false);
-    } 
+    }
   }, [searchTerm]);
 
   const nominateMovie = (movie) => {
@@ -124,7 +131,6 @@ function App() {
 
 
   return (
-
     <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
       <Helmet>
@@ -136,8 +142,21 @@ function App() {
         onDarkModeToggle={setDarkMode}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm} />
-      <Box>
-        <Grid container direction="row" alignItems="stretch" style={{ paddingTop: "2%" }}>
+      <Box style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+      }}>
+        <Grid
+          container
+          direction="row"
+          alignItems="stretch"
+          style={{
+            height: '100%',
+            paddingTop: '2.5%',
+            paddingBottom: '2.5%',
+          }}
+        >
           <Grid item xs={12}>
             <LandingSearch
               landing={landing}
@@ -170,7 +189,7 @@ function App() {
             </>
           )}
         </Grid>
-      </Box >
+      </Box>
       <AlertDialog
         open={nominationsCompleted}
         nominations={nominatedMoviesList}

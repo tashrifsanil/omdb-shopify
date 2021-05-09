@@ -38,7 +38,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
   },
   controls: {
-    // paddingTop: "20%",
   }
 }));
 
@@ -47,8 +46,14 @@ const SearchResultCard = (props) => {
   const [useAltPoster, setUseAltPoster] = useState(false);
 
   useEffect(() => {
-    if (props.movie.Poster === "N/A" || props.movie.Poster.length === 0) {
+    if (props.movie.Poster === null || props.movie.Poster === undefined) {
       setUseAltPoster(true);
+    } else {
+      if (props.movie.Poster.localeCompare("N/A") === 0 || props.movie.Poster.length === 0) {
+        setUseAltPoster(true);
+      } else {
+        setUseAltPoster(false);
+      }
     }
   }, [props.movie])
 
@@ -63,7 +68,7 @@ const SearchResultCard = (props) => {
         ) : (
           <>
             {useAltPoster ? (
-                <TheatersOutlinedIcon className={classes.cover}/>
+              <TheatersOutlinedIcon className={classes.cover} />
             ) : (
               <img
                 className={classes.cover}

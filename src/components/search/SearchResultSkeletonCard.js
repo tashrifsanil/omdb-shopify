@@ -63,16 +63,16 @@ const SearchResultSkeletonCard = (props) => {
                 <Button
                     size="small"
                     disabled
-                    fullWidth="true"
+                    fullWidth={true}
                 >
                     <Skeleton animation="wave" height="100%" width="100%" />
                 </Button>
                 <Button
                     size="small"
                     disabled
-                    fullWidth="true"
+                    fullWidth={true}
                     >
-                    <Skeleton animation="wave" height="100%" width="100%" />
+                    <Skeleton animation="wave" height="100%" width="100%"/>
                 </Button>
             </CardActions>
         </Card>

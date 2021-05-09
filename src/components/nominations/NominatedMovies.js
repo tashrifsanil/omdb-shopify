@@ -54,21 +54,29 @@ const NominatedMovies = (props) => {
   return (
     <>
       {props.landing ? null : (
-        <>
+        <Grid
+          container
+          spacing={1}
+          alignItems="stretch"
+          style={{ maxHeight: '95%' }}>
+
           <Grid item container xs={12}
-            alignItems="center"
-            justify="space-around">
+            alignItems="flex-start"
+            justify="flex-end"
+            spacing={2}
+            >
             <Grid item>
-              <Typography variant="h6" className={classes.typography}>
-                NOMINATIONS
+            <Typography variant="h6">
+                NOMINATED
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="h6" className={classes.typography}>
+            <Typography variant="h3">
                 {props.movies.length}/{maxNominations}
               </Typography>
             </Grid>
           </Grid>
+          
           {props.movies.map((movie, index) => {
             return (
               <Grid item xs={12}>
@@ -87,7 +95,7 @@ const NominatedMovies = (props) => {
                 </Grid>
               );
             })}
-        </>
+        </Grid>
       )}
     </>
   );
