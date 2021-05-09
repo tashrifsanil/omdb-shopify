@@ -17,7 +17,6 @@ import SearchResults from "./components/search/SearchResults";
 import NominatedMovies from "./components/nominations/NominatedMovies";
 import AlertDialog from "./components/AlertDialog";
 
-
 function App() {
   const [landing, setLanding] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
@@ -28,7 +27,6 @@ function App() {
   const [nominationsCompleted, setNominationsCompleted] = useState(false);
 
   const maxNominations = 5;
-
 
 
   useEffect(() => {
@@ -46,15 +44,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Search term has changed, if it's more than 3 characters show search results
-
     if (searchTerm.length > 0) {
       setLanding(false);
-    }
-    if (nominatedMoviesList.length > 0) {
-      setLanding(false);
-    }
-  }, [searchTerm, nominatedMoviesList]);
+    } 
+  }, [searchTerm]);
 
   const nominateMovie = (movie) => {
     if (nominatedMoviesList.length < maxNominations - 1) {
@@ -76,9 +69,9 @@ function App() {
 
   const handleHomeClick = () => {
     setSearchTerm("");
-    setNominatedMoviesList([]);
-    setNominationsCompleted(false);
+    // setNominatedMoviesList([]);
     setLanding(true);
+    setNominationsCompleted(false);
   }
 
   const removeNomination = (movie) => {
@@ -97,11 +90,24 @@ function App() {
 
 
   // dark mode theming
-  const lightTheme = createMuiTheme({});
+  const lightTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#008060',
+      },
+      secondary: {
+        main: '#cccccc',
+      },
+    },
+  });
+
   const darkTheme = createMuiTheme({
     palette: {
       primary: {
-        main: '#BB86FC',
+        main: '#008060',
+      },
+      secondary: {
+        main: '#cccccc',
       },
       background: {
         default: '#121212',
@@ -110,14 +116,7 @@ function App() {
       text: {
         primary: '#e3e3e3',
         secondary: '#a5a5a5',
-        disabled: '#BB86FC'
       },
-      action: {
-        active: '#e3e3e3',
-        disabledBackground: '#BB86FC',
-      },
-      divider: "#BB86FC",
-      searchfield: '#2f2f2f',
     },
 
 
@@ -138,7 +137,7 @@ function App() {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm} />
       <Box>
-        <Grid container direction="row" alignItems="stretch">
+        <Grid container direction="row" alignItems="stretch" style={{ paddingTop: "2%" }}>
           <Grid item xs={12}>
             <LandingSearch
               landing={landing}
@@ -157,7 +156,10 @@ function App() {
                   nominatedMoviesList={nominatedMoviesList} />
 
               </Grid>
-              <Grid item container direction="row" xs={3} spacing={2} alignItems="stretch">
+              <Grid item container direction="row" xs={3}
+                spacing={2}
+                alignItems="stretch"
+                justify="space-between">
                 <NominatedMovies
                   movies={nominatedMoviesList}
                   onRemoveNominationClicked={removeNomination}
@@ -167,7 +169,6 @@ function App() {
               <Grid item xs={1} />
             </>
           )}
-
         </Grid>
       </Box >
       <AlertDialog

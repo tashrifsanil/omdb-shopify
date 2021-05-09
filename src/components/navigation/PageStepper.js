@@ -42,7 +42,7 @@ const PageStepper = (props) => {
 
             </Grid>
             <Grid item>
-                <Button size="small" onClick={props.onNext} disabled={props.activePage === props.steps - 1}>
+                <Button size="small" onClick={props.onNext} disabled={props.activePage === props.steps}>
                     Next
                     {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
                 </Button>

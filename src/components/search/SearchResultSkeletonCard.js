@@ -7,6 +7,7 @@ import {
     CardActions,
     CardContent,
     CardMedia,
+    Button,
 } from "@material-ui/core";
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -23,26 +24,21 @@ const useStyles = makeStyles((theme) => ({
     cover: {
         width: "100%",
         height: "20vh",
+        // objectFit: 'cover',
+    },
+    title: {
+        width: "100%",
+        height: "1rem",
+    },
+    year: {
+        width: "80%",
+        height: "1rem",
     },
     content: {
-        // height: "100%",
+        height: "11vh",
     },
-    skeletonTitle: {
-        width: "80%",
-        height: "3.5vh",
+    controls: {
     },
-    skeletonSubTitle: {
-        width: "5vw",
-        height: "3.5vh",
-    },
-    skeletonMedia: {
-        height: "20vh",
-        width: "100%",
-    },
-    skeletonContent: {
-        width: "5vw",
-        paddingBottom: "32%",
-    }
 }));
 
 const SearchResultSkeletonCard = (props) => {
@@ -57,24 +53,27 @@ const SearchResultSkeletonCard = (props) => {
 
     return (
         <Card className={classes.root} fullWidth={true}>
-            <CardActionArea>
+            <Skeleton animation="wave" variant="rect" className={classes.cover} />
 
-                <CardMedia
+            <CardContent className={classes.content}>
+                <Skeleton animation="wave" className={classes.title} />
+                <Skeleton animation="wave" className={classes.year} />
+            </CardContent>
+            <CardActions className={classes.controls}>
+                <Button
+                    size="small"
+                    disabled
+                    fullWidth="true"
                 >
-                    <Skeleton animation="wave" variant="rect" height="20vh" width="100%" />
-
-                </CardMedia>
-                <CardContent className={classes.content}>
-
-                    <div className={classes.skeletonContent}>
-                        <Skeleton animation="wave" height="100%" width="100%" />
-                        <Skeleton animation="wave" height="100%" width="80%" />
-                    </div>
-                </CardContent>
-            </CardActionArea>
-            <CardActions>
-                <Skeleton animation="wave" height="100%" width="100%" />
-                <Skeleton animation="wave" height="100%" width="100%" />
+                    <Skeleton animation="wave" height="100%" width="100%" />
+                </Button>
+                <Button
+                    size="small"
+                    disabled
+                    fullWidth="true"
+                    >
+                    <Skeleton animation="wave" height="100%" width="100%" />
+                </Button>
             </CardActions>
         </Card>
     );

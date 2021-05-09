@@ -53,40 +53,42 @@ const NominatedMovies = (props) => {
 
   return (
     <>
-      <>
-        <Grid item container xs={12}
-          alignItems="center"
-          justify="space-around">
-          <Grid item>
-            <Typography variant="h6" className={classes.typography}>
-              NOMINATIONS
-            </Typography>
-          </Grid>
-          <Grid item>
-            <Typography variant="h6" className={classes.typography}>
-              {props.movies.length}/{maxNominations}
-            </Typography>
-          </Grid>
-        </Grid>
-        {props.movies.map((movie, index) => {
-          return (
-            <Grid item xs={12}>
-              <NominatedMovieCard
-                movie={movie}
-                onRemoveNominationClicked={props.onRemoveNominationClicked}
-              />
+      {props.landing ? null : (
+        <>
+          <Grid item container xs={12}
+            alignItems="center"
+            justify="space-around">
+            <Grid item>
+              <Typography variant="h6" className={classes.typography}>
+                NOMINATIONS
+              </Typography>
             </Grid>
-          );
-        })}
-        {
-          Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
+            <Grid item>
+              <Typography variant="h6" className={classes.typography}>
+                {props.movies.length}/{maxNominations}
+              </Typography>
+            </Grid>
+          </Grid>
+          {props.movies.map((movie, index) => {
             return (
               <Grid item xs={12}>
-                <NominationPlaceholder />
+                <NominatedMovieCard
+                  movie={movie}
+                  onRemoveNominationClicked={props.onRemoveNominationClicked}
+                />
               </Grid>
             );
           })}
-      </>
+          {
+            Array(maxNominations - props.movies.length).fill(movieDataFormat).map((movie, index) => {
+              return (
+                <Grid item xs={12}>
+                  <NominationPlaceholder />
+                </Grid>
+              );
+            })}
+        </>
+      )}
     </>
   );
 };

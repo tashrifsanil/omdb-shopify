@@ -157,14 +157,8 @@ const SearchResults = (props) => {
   return (
     <>
       {show ? (
-        <Box component="flex" style={{ height: '100%', width: '100%' }} spacing={2}>
-          <PageStepper
-            steps={maxSteps}
-            activePage={activePage}
-            onBack={handlePageBack}
-            onNext={handlePageNext}
-          />
-          <Grid container spacing={2}>
+        <Box component="flex" style={{ height: '100%', width: '100%' , alignItems: "stretch"}} spacing={2}>
+          <Grid container spacing={2} alignItems="stretch">
             <Grid item xs={12}>
               <Box className={classes.row}>
                 {sliceMap((movie, index) => {
@@ -210,9 +204,13 @@ const SearchResults = (props) => {
 
               </Box>
             </Grid>
-
           </Grid>
-
+          <PageStepper
+            steps={maxSteps}
+            activePage={activePage}
+            onBack={handlePageBack}
+            onNext={handlePageNext}
+          />
         </Box>
 
       ) : null}

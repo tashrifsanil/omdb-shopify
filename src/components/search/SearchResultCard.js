@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 
 import Skeleton from '@material-ui/lab/Skeleton';
+import TheatersOutlinedIcon from '@material-ui/icons/TheatersOutlined';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     width: "100%",
     height: "20vh",
+    objectFit: 'cover',
   },
   content: {
     height: "100%",
@@ -36,17 +38,19 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1rem",
   },
   controls: {
-    paddingTop: "20%",
+    // paddingTop: "20%",
   }
 }));
 
 const SearchResultCard = (props) => {
   const classes = useStyles();
+  const [useAltPoster, setUseAltPoster] = useState(false);
 
   useEffect(() => {
-    console.log("Search result card loading -> ", props.loading);
-    console.log("Search result movie -> ", props.movie);
-  }, [props.loading, props.movie])
+    if (props.movie.Poster === "N/A" || props.movie.Poster.length === 0) {
+      setUseAltPoster(true);
+    }
+  }, [props.movie])
 
 
 
@@ -57,11 +61,17 @@ const SearchResultCard = (props) => {
         {props.loading ? (
           <Skeleton animation="wave" variant="rect" height="20vh" width="100%" />
         ) : (
-          <CardMedia
-            component="img"
-            className={classes.cover}
-            image={props.movie.Poster}
-          />
+          <>
+            {useAltPoster ? (
+                <TheatersOutlinedIcon className={classes.cover}/>
+            ) : (
+              <img
+                className={classes.cover}
+                src={props.movie.Poster}
+                alt={"Poster unavailable"}
+              />
+            )}
+          </>
         )}
         <CardContent className={classes.content}>
           {props.loading ? (
