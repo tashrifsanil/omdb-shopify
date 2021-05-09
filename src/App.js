@@ -1,42 +1,26 @@
-// import "./App.css";
-import "fontsource-roboto";
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import React, { useEffect, useState } from "react";
 
 import {
-  ThemeProvider,
   MuiThemeProvider,
   createMuiTheme
 } from "@material-ui/core/styles";
 
 import {
   makeStyles,
-  useTheme
 } from "@material-ui/core/styles";
 
-import AlertDialog from "./components/AlertDialog";
-// import DialogContentText from '@material-ui/core/DialogContentText';
-import Grid from "@material-ui/core/Grid";
-import MovieMoreInfo from "./components/MovieMoreInfo";
-import NominatedMovies from "./components/NominatedMovies";
-import NominatedMovieCard from "./components/NominatedMovieCard";
-import PageControl from "./components/PageControl";
-import SearchAppBar from "./components/SearchAppBar";
-import SearchResults from "./components/SearchResults";
-import Typography from "@material-ui/core/Typography";
+
 import { Helmet } from 'react-helmet';
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
+import { Box, Grid } from "@material-ui/core";
 
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchIcon from "@material-ui/icons/Search";
-import IconButton from "@material-ui/core/IconButton";
-import TextField from "@material-ui/core/TextField";
+import SearchField from "./components/search/SearchField";
+import SearchResults from "./components/search/SearchResults";
 
-import { Box, Card } from "@material-ui/core";
-import SearchField from "./components/SearchField";
+import NominatedMovies from "./components/nominations/NominatedMovies";
+import AlertDialog from "./components/AlertDialog";
+
 
 const useStyles = makeStyles((theme) => ({
   nominationsHeader: {
@@ -47,31 +31,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
+  const [landing, setLanding] = useState(true);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResultsVisible, setSearchResultsVisibility] = useState(false);
-  const [nominationsVisible, setNominationsVisibility] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [nominatedMoviesList, setNominatedMoviesList] = useState([]);
-  const [maxPages, setMaxPages] = useState(1);
-
   const [nominationsCompleted, setNominationsCompleted] = useState(false);
-  const [openNominationsDialog, setOpenNominationsDialog] = useState(false);
 
   const maxNominations = 5;
 
-  const [landing, setLanding] = useState(true);
 
-  const [showMovieMoreInfo, setShowMovieMoreInfo] = useState(false);
-
-  // The movie to display in more info section
-  const [movie4MoreInfo, setMovie4MoreInfo] = useState({});
-
-  const onSearchEntryClicked = (movie) => {
-    setMovie4MoreInfo(movie);
-    console.log("Search Entry clicked ", movie4MoreInfo);
-    setShowMovieMoreInfo(true);
-  };
 
   useEffect(() => {
     const nominatedMovies = JSON.parse(
@@ -92,14 +61,9 @@ function App() {
 
     if (searchTerm.length > 0) {
       setLanding(false);
-      setSearchResultsVisibility(true);
-    } else if (searchTerm.length === 0) {
-      setSearchResultsVisibility(false);
-      setShowMovieMoreInfo(false);
     }
     if (nominatedMoviesList.length > 0) {
       setLanding(false);
-      setNominationsVisibility(true);
     }
   }, [searchTerm, nominatedMoviesList]);
 
@@ -203,7 +167,6 @@ function App() {
               <Grid item container direction="row" xs={3} spacing={2} alignItems="stretch">
                 <NominatedMovies
                   movies={nominatedMoviesList}
-                  setNominationsCompleted={setOpenNominationsDialog}
                   onRemoveNominationClicked={removeNomination}
                 />
 
@@ -215,7 +178,6 @@ function App() {
         </Grid>
       </Box >
       <AlertDialog
-        hideButton={nominationsVisible}
         open={nominationsCompleted}
         nominations={nominatedMoviesList}
       />

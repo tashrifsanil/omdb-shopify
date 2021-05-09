@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import {
     Grid,
@@ -32,7 +32,7 @@ const PageStepper = (props) => {
             alignItems="center"maxStepsmaxStepsmaxSteps
         >
             <Grid item>
-                <Button size="small" onClick={props.onBack} disabled={props.activePage == 1}>
+                <Button size="small" onClick={props.onBack} disabled={props.activePage === 1}>
                     {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
                     Back
                 </Button>

@@ -5,7 +5,6 @@ import {
     InputAdornment,
     IconButton,
     Grid,
-    InputBase,
     Icon,
     Typography,
     Divider
@@ -14,7 +13,6 @@ import {
 
 import {
     makeStyles,
-    fade
 } from '@material-ui/core/styles';
 
 import MovieCreationOutlinedIcon from '@material-ui/icons/MovieCreationOutlined';
@@ -22,7 +20,7 @@ import MovieCreationOutlinedIcon from '@material-ui/icons/MovieCreationOutlined'
 import '@fontsource/roboto';
 
 import SearchIcon from "@material-ui/icons/Search";
-import ShopifyIcon from '../resources/icons/shopify.svg'
+import ShopifyIcon from '../../resources/icons/shopify.svg'
 
 const SearchField = (props) => {
     const [landing, setLanding] = useState(true);
@@ -46,7 +44,7 @@ const SearchField = (props) => {
     })
 
     const handleLanding = () => {
-        if (props.landing == false) {
+        if (props.landing === false) {
             setRootStyle({
                 paddingTop: "0vh",
                 paddingBottom: "1vh",

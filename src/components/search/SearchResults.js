@@ -3,22 +3,12 @@ import React, { useEffect, useState } from "react";
 import {
   Grid,
   Box,
-  Card,
-  Divider,
-  MobileStepper,
-  Button,
-  Typography,
 } from "@material-ui/core";
-
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowRight
-} from '@material-ui/icons';
 
 import SearchResultCard from "./SearchResultCard";
 import SearchResultSkeletonCard from "./SearchResultSkeletonCard";
 
-import PageStepper from "./navigation/PageStepper";
+import PageStepper from "../navigation/PageStepper";
 
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 

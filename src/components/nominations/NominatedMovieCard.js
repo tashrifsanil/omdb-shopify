@@ -5,14 +5,9 @@ import {
   Card,
   CardContent,
   CardMedia,
-  IconButton,
   Typography,
-  SkipPreviousIcon,
-  PlayArrowIcon,
-  SkipNextIcon,
   Button,
   Grid,
-  Box,
 } from '@material-ui/core'
 
 import Skeleton from '@material-ui/lab/Skeleton';
@@ -45,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 const NominatedMovieCard = (props) => {
   const classes = useStyles();
   const [showSkeleton, setShowSkeleton] = useState(false);
-  const theme = useTheme();
 
   useEffect(() => {
     setShowSkeleton(props.showSkeleton);
